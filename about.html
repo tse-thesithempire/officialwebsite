@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - The Sith Empire</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cinzel+Decorative:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* === IMPERIAL DOSSIER REVAMP === */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --void:#020000; --obsidian:#080202; --panel:#120505; --blood:#8b0000; --blood-hot:#ff1616; --gold:#d8a640; --gold-bright:#ffdd7a; --parchment:#eadfc9; --ash:#a99b88; --stroke:rgba(216,166,64,.25); --glass:rgba(12,2,2,.76);
+  --font-display:'Cinzel Decorative','Cinzel',serif; --font-serif:'Cinzel',serif; --font-body:'Rajdhani',sans-serif; --font-tech:'Orbitron',sans-serif;
+}
+html { scroll-behavior:smooth; }
+body { min-height:100vh; background: radial-gradient(circle at 82% 18%, rgba(255,22,22,.16), transparent 28rem), radial-gradient(circle at 12% 55%, rgba(216,166,64,.09), transparent 24rem), linear-gradient(180deg,#030000,#0b0202 55%,#020000); color:var(--parchment); font-family:var(--font-body); font-size:16px; line-height:1.65; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; z-index:0; pointer-events:none; background: linear-gradient(115deg, transparent 0 48%, rgba(255,22,22,.05) 49%, transparent 50% 100%), linear-gradient(rgba(216,166,64,.03) 1px, transparent 1px), linear-gradient(90deg, rgba(216,166,64,.03) 1px, transparent 1px); background-size:cover, 46px 46px, 46px 46px; mask-image:linear-gradient(to bottom, #000, rgba(0,0,0,.25)); }
+body::after { content:''; position:fixed; inset:0; pointer-events:none; z-index:9999; opacity:.18; background:repeating-linear-gradient(0deg, rgba(255,255,255,.05), rgba(255,255,255,.05) 1px, transparent 1px, transparent 4px); }
+a { text-decoration:none; color:inherit; }
+#site-header { position:fixed; top:16px; left:24px; right:24px; z-index:1000; min-height:74px; border:1px solid rgba(216,166,64,.34); border-bottom-color:rgba(255,22,22,.5); border-radius:22px; background:linear-gradient(180deg, rgba(16,4,4,.88), rgba(5,0,0,.76)); box-shadow:0 18px 70px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.06); backdrop-filter:blur(18px) saturate(130%); display:flex; align-items:center; padding:10px 20px; }
+#site-header::before { content:''; position:absolute; inset:-1px 18px auto; height:2px; background:linear-gradient(90deg, transparent, var(--gold-bright), var(--blood-hot), var(--gold-bright), transparent); filter:drop-shadow(0 0 10px rgba(255,22,22,.9)); }
+.header-inner { width:100%; display:grid; grid-template-columns:minmax(220px,.85fr) minmax(400px,auto) minmax(180px,.7fr); gap:20px; align-items:center; }
+.logo-area { display:flex; align-items:center; gap:12px; justify-self:start; }
+.logo-icon { width:52px; height:52px; position:relative; flex:0 0 auto; }
+.logo-icon::before { content:''; position:absolute; inset:-8px; border-radius:50%; background:conic-gradient(from 180deg, transparent, rgba(255,22,22,.45), transparent, rgba(216,166,64,.35), transparent); animation:slowSpin 12s linear infinite; }
+.logo-icon img { position:relative; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 0 10px rgba(255,0,0,.8)); }
+.logo-text h1 { font-family:var(--font-serif); font-size:clamp(16px,1.4vw,22px); font-weight:900; letter-spacing:3px; line-height:1; background:linear-gradient(180deg,#fff3b0,#d6a13b 45%,#7b4f12 70%,#ffdd7a); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent; }
+.logo-text span { display:block; margin-top:5px; color:var(--gold); font-family:var(--font-tech); font-size:9px; letter-spacing:3px; text-transform:uppercase; white-space:nowrap; }
+.nav-links { justify-self:center; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:clamp(10px,1.45vw,24px); }
+.nav-links a { position:relative; padding:8px 0; color:#c5b7a2; font-size:13px; font-weight:700; text-transform:uppercase; letter-spacing:1.6px; transition:color .25s ease, text-shadow .25s ease; }
+.nav-links a::before { content:''; position:absolute; left:50%; bottom:0; width:0; height:1px; background:linear-gradient(90deg,transparent,var(--blood-hot),var(--gold),transparent); transform:translateX(-50%); transition:width .28s ease; }
+.nav-links a:hover, .nav-links a.active { color:#fff1cf; text-shadow:0 0 12px rgba(255,22,22,.75); }
+.nav-links a:hover::before, .nav-links a.active::before { width:100%; }
+.header-cta { display: flex; flex-direction: column; align-items: center; gap: 6px; justify-self: end; text-align: center; }
+.btn-primary, .btn-secondary { position:relative; isolation:isolate; overflow:hidden; border-radius:999px; transition:transform .25s ease, box-shadow .25s ease; }
+.header-cta a { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); background: linear-gradient(to bottom, #7A0000, #500000); border: 2px solid var(--glow-red); padding: 10px 24px; box-shadow: 0 0 10px rgba(255,0,0,0.3); transition: all 0.3s ease; }
+.btn-primary::after, .btn-secondary::after { content:''; position:absolute; inset:0; z-index:-1; background:linear-gradient(110deg, transparent 0 35%, rgba(255,255,255,.32) 50%, transparent 65% 100%); transform:translateX(-120%); transition:transform .6s ease; }
+.btn-primary:hover::after, .btn-secondary:hover::after { transform:translateX(120%); }
+.header-cta a:hover { background: linear-gradient(to bottom, #A00000, #700000); transform: scale(1.05); box-shadow: 0 0 20px rgba(255,0,0,0.5); }
+.btn-primary:hover, .btn-secondary:hover { transform:translateY(-2px); box-shadow:0 0 32px rgba(255,22,22,.34); }
+.header-cta small { display: block; font-size: 11px; font-weight: 600; color: #DAA520; letter-spacing: 2px; text-transform: uppercase; text-align: center; }
+.about-hero { min-height:76vh; display:grid; place-items:center; text-align:center; padding:160px 48px 80px; position:relative; overflow:hidden; background:linear-gradient(180deg, rgba(2,0,0,.72), rgba(2,0,0,.94)), url('slide-1.png') center/cover no-repeat; }
+.about-hero::before { content:''; position:absolute; inset:8% 9%; border:1px solid rgba(216,166,64,.22); clip-path:polygon(0 0, 88% 0, 100% 18%, 100% 100%, 12% 100%, 0 82%); box-shadow:inset 0 0 80px rgba(255,22,22,.08); }
+.about-hero::after { content:'IMPERIAL DOSSIER'; position:absolute; left:7vw; bottom:58px; color:rgba(216,166,64,.42); font-family:var(--font-tech); font-size:12px; letter-spacing:5px; writing-mode:vertical-rl; }
+.about-hero-content { position:relative; z-index:1; max-width:980px; padding:42px; background:radial-gradient(circle at center, rgba(139,0,0,.24), transparent 66%); }
+.about-symbol { width:116px; height:116px; margin:0 auto 26px; position:relative; animation:symbolFloat 4s ease-in-out infinite; }
+.about-symbol::before { content:''; position:absolute; inset:-18px; border-radius:50%; background:conic-gradient(transparent, rgba(255,22,22,.7), transparent, rgba(216,166,64,.55), transparent); filter:blur(.2px); animation:slowSpin 11s linear infinite; }
+.about-symbol img { position:relative; width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 0 24px rgba(255,22,22,.65)); }
+.about-title { font-family: var(--font-display); font-size: clamp(44px, 5.5vw, 62px); font-weight: 900; background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(218,165,32,0.4)); letter-spacing: 4px; line-height: 1; margin-bottom: 16px; text-transform: uppercase; }
+.about-divider { display:flex; justify-content:center; align-items:center; gap:14px; margin:24px auto 18px; }
+.about-divider .line { width:min(190px,30vw); height:1px; background:linear-gradient(90deg, transparent, var(--gold), var(--blood-hot)); box-shadow:0 0 12px rgba(255,22,22,.55); }
+.about-divider .line:last-child { background:linear-gradient(90deg,var(--blood-hot),var(--gold),transparent); }
+.about-divider .diamond { width:12px; height:12px; transform:rotate(45deg); background:var(--gold); box-shadow:0 0 16px var(--gold),0 0 28px rgba(255,22,22,.5); }
+.about-subtitle { max-width:760px; margin:0 auto; color:#d5c8b4; font-size:clamp(17px,1.8vw,22px); line-height:1.6; }
+.about-content { position:relative; z-index:2; max-width:1260px; margin:0 auto; padding:86px 48px 110px; display:grid; grid-template-columns:repeat(12, 1fr); gap:24px; }
+.about-section { opacity:0; transform:translateY(28px); animation:fadeInUp .7s ease forwards; }
+.about-section:nth-child(1) { grid-column:span 7; animation-delay:.05s; }
+.about-section:nth-child(2) { grid-column:span 5; animation-delay:.12s; }
+.about-section:nth-child(3) { grid-column:span 5; animation-delay:.19s; }
+.about-section:nth-child(4) { grid-column:span 7; animation-delay:.26s; }
+.about-section:nth-child(5) { grid-column:span 6; animation-delay:.33s; }
+.about-section:nth-child(6) { grid-column:span 6; animation-delay:.40s; }
+.about-card { position:relative; height:100%; overflow:hidden; padding:30px; border:1px solid var(--stroke); border-radius:0; background:linear-gradient(145deg, rgba(18,4,4,.9), rgba(5,0,0,.64)); box-shadow:0 22px 70px rgba(0,0,0,.46), inset 0 0 70px rgba(255,22,22,.04); }
+.about-card::before { content:''; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at top right, rgba(255,22,22,.16), transparent 44%), linear-gradient(130deg, rgba(216,166,64,.05), transparent 34%); }
+.about-card::after { content:''; position:absolute; top:0; left:28px; right:28px; height:1px; background:linear-gradient(90deg, transparent, rgba(216,166,64,.8), transparent); }
+.about-card:hover { transform:translateY(-4px); border-color:rgba(255,22,22,.5); transition:transform .25s ease, border-color .25s ease; }
+.about-card h3 { position:relative; display:flex; align-items:center; gap:12px; margin-bottom:16px; color:var(--gold-bright); font-family:var(--font-serif); font-size:22px; line-height:1.2; text-transform:uppercase; letter-spacing:2px; }
+.section-icon { width:31px; height:31px; flex:0 0 auto; color:var(--blood-hot); filter:drop-shadow(0 0 9px rgba(255,22,22,.72)); }
+.about-card p { position:relative; color:#d2c5b2; font-size:16px; line-height:1.75; }
+.pillars-grid { position:relative; display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:14px; margin-top:22px; }
+.pillar-item { border:1px solid rgba(216,166,64,.18); border-radius:0; padding:18px; background:rgba(0,0,0,.28); transition:transform .22s ease, border-color .22s ease; }
+.pillar-item:hover { transform:translateY(-3px); border-color:rgba(255,22,22,.48); }
+.pillar-item h4 { color:#fff0c8; font-family:var(--font-serif); font-size:18px; margin-bottom:8px; letter-spacing:1px; }
+.pillar-item p { color:var(--ash); font-size:15px; line-height:1.7; }
+.about-cta { grid-column:1 / -1; margin-top:16px; position:relative; overflow:hidden; padding:42px; border:1px solid rgba(255,22,22,.36); border-radius:0; background:linear-gradient(135deg, rgba(139,0,0,.42), rgba(4,0,0,.84)), url('slide-4.png') center/cover no-repeat; text-align:center; box-shadow:0 24px 90px rgba(0,0,0,.5); }
+.about-cta::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at center, rgba(255,22,22,.20), transparent 60%); }
+.about-cta h3, .about-cta p, .cta-buttons { position:relative; }
+.about-cta h3 { font-family:var(--font-serif); color:var(--gold-bright); font-size:clamp(28px,3.5vw,42px); letter-spacing:3px; }
+.about-cta p { color:#dccfb9; font-size:17px; line-height:1.7; margin:10px auto 26px; max-width:720px; }
+.cta-buttons { display:flex; justify-content:center; flex-wrap:wrap; gap:16px; }
+.btn-primary, .btn-secondary { display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:50px; padding:13px 24px; font-weight:800; text-transform:uppercase; letter-spacing:1.4px; }
+.btn-primary { background:linear-gradient(135deg,#a40000,#410000); border:1px solid rgba(255,22,22,.85); color:#fff7e8; }
+.btn-secondary { background:rgba(10,0,0,.65); border:1px solid rgba(216,166,64,.42); color:var(--gold-bright); }
+#site-footer { position:relative; z-index:3; min-height:76px; display:grid; grid-template-columns:auto 1fr; gap:18px; align-items:center; padding:18px 7vw; border-top:1px solid rgba(216,166,64,.24); background:rgba(3,0,0,.92); overflow:hidden; }
+.footer-label { color:var(--gold-bright); font-family:var(--font-tech); font-size:12px; letter-spacing:2px; text-transform:uppercase; }
+.footer-ticker { overflow:hidden; color:#a99a86; white-space:nowrap; }
+.ticker-track { display:inline-flex; gap:32px; animation:ticker 34s linear infinite; }
+.particles { position:fixed; inset:0; pointer-events:none; z-index:1; }
+.particle { position:absolute; bottom:-20px; border-radius:50%; background:var(--blood-hot); box-shadow:0 0 10px rgba(255,22,22,.9); animation:rise linear infinite; opacity:.7; }
+@keyframes fadeInUp { to { opacity:1; transform:translateY(0); } }
+@keyframes symbolFloat { 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(-10px); } }
+@keyframes slowSpin { to { transform:rotate(360deg); } }
+@keyframes rise { from { transform:translateY(0) translateX(0); opacity:0; } 10%{ opacity:.7; } to { transform:translateY(-110vh) translateX(28px); opacity:0; } }
+@keyframes ticker { from { transform:translateX(0); } to { transform:translateX(-50%); } }
+@media (max-width:1180px) { #site-header{top:10px;left:10px;right:10px}.header-inner{grid-template-columns:1fr;justify-items:center;gap:12px}.logo-area,.header-cta{justify-self:center}.about-hero{padding-top:240px}.about-section:nth-child(n){grid-column:1 / -1}.about-content{max-width:900px} }
+@media (max-width:720px) { #site-header{position:absolute;border-radius:16px;padding:14px}.nav-links{gap:9px 14px}.nav-links a{font-size:11px}.header-cta a{padding:9px 14px;font-size:12px}.about-hero{min-height:auto;padding:240px 20px 70px}.about-hero::after{display:none}.about-hero-content{padding:20px}.about-content{padding:54px 18px 80px}.about-card{padding:22px}.pillars-grid{grid-template-columns:1fr}.about-cta{padding:30px 20px}#site-footer{grid-template-columns:1fr;text-align:center} }
+
+
+
+
+/* === ABOUT CONTENT HEADINGS: HIGH COMMAND MATCH === */
+.about-card h3,
+.pillar-item h4,
+.about-cta h3 {
+  font-family: var(--font-serif) !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+  line-height: 1.15 !important;
+  margin-bottom: 4px !important;
+  color: var(--text-light) !important;
+  background: none !important;
+  -webkit-background-clip: initial !important;
+  background-clip: initial !important;
+  -webkit-text-fill-color: currentColor !important;
+  filter: none !important;
+}
+.about-card h3 { font-size: 22px !important; margin-bottom: 16px !important; }
+.pillar-item h4 { font-size: 18px !important; margin-bottom: 8px !important; }
+.about-cta h3 { font-size: clamp(28px,3.5vw,42px) !important; margin-bottom: 10px !important; }
+
+/* === UNIVERSAL IMPERIAL NAVIGATION === */
+#site-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  background: rgba(5,0,0,0.92) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--accent-red, #8B0000) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(12px) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 48px 0 34px !important;
+}
+#site-header::before { content: none !important; display: none !important; }
+.header-inner {
+  width: 100% !important;
+  margin: 0 !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center !important;
+  gap: 20px !important;
+}
+.logo-area {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  justify-self: start !important;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+.logo-icon {
+  width: 50px !important;
+  height: 50px !important;
+  position: relative !important;
+  flex: 0 0 auto !important;
+}
+.logo-icon::before { content: none !important; display: none !important; animation: none !important; }
+.logo-icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 0 6px rgba(255,0,0,0.5)) !important;
+}
+.logo-text h1 {
+  font-family: 'Cinzel', serif !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+  filter: drop-shadow(0 0 8px rgba(218,165,32,0.4)) drop-shadow(0 2px 4px rgba(0,0,0,0.8)) !important;
+  letter-spacing: 3px !important;
+  line-height: 1.1 !important;
+  margin: 0 !important;
+}
+.logo-text span {
+  display: block !important;
+  margin-top: 0 !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  color: #DAA520 !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+.nav-links {
+  display: flex !important;
+  gap: 32px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  justify-self: center !important;
+  flex-wrap: nowrap !important;
+}
+.nav-links a {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  color: #aaa !important;
+  position: relative !important;
+  padding: 4px 0 !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease, text-shadow 0.3s ease !important;
+  transform: none !important;
+}
+.nav-links a::before { content: none !important; display: none !important; }
+.nav-links a::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 50% !important;
+  right: 50% !important;
+  width: auto !important;
+  height: 2px !important;
+  background: var(--glow-red, #FF0000) !important;
+  box-shadow: 0 0 6px var(--glow-red, #FF0000) !important;
+  transition: left 0.3s ease, right 0.3s ease !important;
+  transform: none !important;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--glow-red, #FF0000) !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+.nav-links a:hover::after,
+.nav-links a.active::after { left: 0 !important; right: 0 !important; }
+.header-cta {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  justify-self: end !important;
+  text-align: center !important;
+}
+.header-cta a {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: var(--text-light, #E8DCC8) !important;
+  background: linear-gradient(to bottom, #7A0000, #500000) !important;
+  border: 2px solid var(--glow-red, #FF0000) !important;
+  border-radius: 0 !important;
+  padding: 10px 24px !important;
+  box-shadow: 0 0 10px rgba(255,0,0,0.3) !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  isolation: auto !important;
+  overflow: visible !important;
+}
+.header-cta a::after { content: none !important; display: none !important; }
+.header-cta a:hover {
+  background: linear-gradient(to bottom, #A00000, #700000) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 0 20px rgba(255,0,0,0.5) !important;
+}
+.header-cta small {
+  display: block !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  color: #DAA520 !important;
+  letter-spacing: 1.25px !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+}
+@media (max-width: 1180px) {
+  #site-header { height: auto !important; min-height: 80px !important; padding: 12px 22px !important; }
+  .header-inner { grid-template-columns: 1fr !important; justify-items: center !important; gap: 12px !important; }
+  .logo-area, .header-cta { justify-self: center !important; }
+  .nav-links { flex-wrap: wrap !important; gap: 10px 20px !important; }
+}
+@media (max-width: 720px) {
+  #site-header { position: absolute !important; padding: 14px !important; }
+  .nav-links { gap: 9px 14px !important; }
+  .nav-links a { font-size: 11px !important; }
+  .header-cta a { padding: 9px 14px !important; font-size: 12px !important; }
+}
+
+
+/* === ABOUT FOOTER + CTA BOX ALIGNMENT === */
+.about-cta .cta-buttons {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  flex-wrap: wrap !important;
+  gap: 18px !important;
+}
+.about-cta .btn-primary,
+.about-cta .btn-secondary {
+  width: 220px !important;
+  min-height: 58px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 0 !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+  text-align: center !important;
+  font-family: var(--font-body) !important;
+  font-size: 14px !important;
+  font-weight: 800 !important;
+  line-height: 1.1 !important;
+  letter-spacing: 1.8px !important;
+  text-transform: uppercase !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.06), 0 0 22px rgba(0,0,0,.36) !important;
+}
+.about-cta .btn-primary {
+  background: linear-gradient(to bottom, #7A0000, #500000) !important;
+  border-color: var(--blood-hot) !important;
+  color: var(--parchment) !important;
+}
+.about-cta .btn-secondary {
+  background: rgba(5,0,0,.76) !important;
+  border-color: var(--gold) !important;
+  color: var(--gold-bright) !important;
+}
+.about-cta .btn-primary:hover,
+.about-cta .btn-secondary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.08), 0 0 22px rgba(255,0,0,.28) !important;
+}
+#site-footer {
+  position: relative !important;
+  z-index: 3 !important;
+  min-height: 76px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 0 !important;
+  padding: 16px 48px !important;
+  border-top: 1px solid rgba(216,166,64,.24) !important;
+  background: var(--void) !important;
+  overflow: hidden !important;
+}
+.footer-label {
+  flex-shrink: 0 !important;
+  color: var(--blood-hot) !important;
+  font-family: var(--font-body) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 3px !important;
+  text-transform: uppercase !important;
+}
+.footer-ticker {
+  flex: 1 !important;
+  overflow: hidden !important;
+  margin: 0 24px !important;
+  position: relative !important;
+  color: inherit !important;
+  white-space: normal !important;
+}
+.footer-ticker::before,
+.footer-ticker::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  width: 40px !important;
+  z-index: 1 !important;
+}
+.footer-ticker::before { left: 0 !important; background: linear-gradient(to right, var(--void), transparent) !important; }
+.footer-ticker::after { right: 0 !important; background: linear-gradient(to left, var(--void), transparent) !important; }
+.ticker-track {
+  display: flex !important;
+  white-space: nowrap !important;
+  gap: 0 !important;
+  animation: ticker 30s linear infinite !important;
+}
+.ticker-track span {
+  font-size: 13px !important;
+  color: #999 !important;
+  letter-spacing: 1px !important;
+  padding-right: 80px !important;
+}
+.footer-map-btn {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 8px 16px !important;
+  border: 1px solid var(--blood) !important;
+  background: transparent !important;
+  color: var(--blood-hot) !important;
+  font-family: var(--font-body) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  transition: all .3s ease !important;
+}
+.footer-map-btn:hover {
+  background: rgba(139,0,0,.2) !important;
+  border-color: var(--blood-hot) !important;
+  box-shadow: 0 0 10px rgba(255,0,0,.2) !important;
+}
+@media (max-width:720px) {
+  #site-footer { flex-direction: column !important; gap: 12px !important; text-align: center !important; padding: 16px 20px !important; }
+  .footer-ticker { margin: 0 !important; width: 100% !important; }
+  .about-cta .btn-primary, .about-cta .btn-secondary { width: min(100%, 240px) !important; }
+}
+
+</style>
+<link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+
+<header id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-area">
+      <div class="logo-icon"><img src="ts-empire-symbol.png" alt="Sith Empire Symbol"></div>
+      <div class="logo-text">
+        <h1>THE SITH EMPIRE</h1>
+        <span>Order &middot; Power &middot; Destiny</span>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html" class="active">About</a>
+      <a href="hierarchy.html">Hierarchy</a>
+      <a href="common-etiquette.html">Common Etiquette</a>
+      <a href="rites-of-the-sith.html">Rites of the Sith</a>
+      <a href="law-and-order.html">Law and Order</a>
+      <a href="academy.html">Academy</a>
+      <a href="spheres.html">Spheres</a>
+      <a href="institutions.html">Institutions</a>
+      <a href="news.html">News</a>
+    </nav>
+    <div class="header-cta">
+      <a href="https://discord.com/invite/bRE6W3CkBe">Join the Empire</a>
+      <small>6000+ Members</small>
+    </div>
+  </div>
+</header>
+
+<section class="about-hero">
+  <div class="about-hero-content">
+    <h1 class="about-title">ABOUT US</h1>
+    <div class="about-divider">
+      <div class="line"></div>
+      <div class="diamond"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+</section>
+
+<section class="about-content">
+
+  <div class="about-section">
+    <div class="about-card">
+      <h3>
+        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 22,8 22,16 12,22 2,16 2,8"/></svg>
+        Who We Are
+      </h3>
+      <p>Built upon the rich foundations of both Star Wars Legends and Canon, the faction strives to recreate the atmosphere, military structure, traditions, and philosophy of the galaxy with as much authenticity as possible while adapting them to engaging gameplay.</p>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-card">
+      <h3>
+        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="4" x2="18" y2="20"/><line x1="18" y1="4" x2="6" y2="20"/></svg>
+        Combat &amp; Progression
+      </h3>
+      <p>Every aspect of the faction is designed to encourage realism, discipline, and meaningful progression. From organized military operations and coordinated formations to rank advancement, specialized divisions, and large-scale campaigns, members participate in an environment where teamwork, leadership, and tactical decision-making are emphasized above all else. Combat is centered around skill, strategy, and coordination rather than individual performance alone, creating battles that are both challenging and rewarding.</p>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-card">
+      <h3>
+        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><line x1="7" y1="8" x2="17" y2="8"/><line x1="7" y1="12" x2="17" y2="12"/><line x1="7" y1="16" x2="12" y2="16"/></svg>
+        Living Lore
+      </h3>
+      <p>Beyond the battlefield, the faction offers a living and evolving setting where lore plays a central role. Events, ceremonies, diplomatic interactions, and story-driven operations are inspired by established Star Wars history while allowing members to actively shape the faction's ongoing narrative. This creates a dynamic experience in which every campaign, victory, and defeat contributes to a broader story within the universe.</p>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-card">
+      <h3>
+        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l8 6v8l-8 4-8-4V9z"/></svg>
+        Authenticity &amp; Immersion
+      </h3>
+      <p>Drawing extensively from both Star Wars Legends and Canon, the faction incorporates authentic military doctrine, customs, iconography, and organizational structures to preserve the identity of the era it represents. Members are encouraged to immerse themselves fully in their roles, fostering an atmosphere that feels true to the Star Wars universe while remaining accessible to newcomers and veterans alike.</p>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-card">
+      <h3>
+        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        The Experience
+      </h3>
+      <p>Whether participating in intense lightsaber duels, coordinated military offensives, defensive campaigns, specialized training exercises, or narrative events, members become part of a community dedicated to excellence, authenticity, and long-term development. Through a combination of competitive combat, immersive roleplay, structured organization, and faithful world-building, the faction seeks to provide one of the most comprehensive and engaging Star Wars experiences available within Saber Arena.</p>
+    </div>
+  </div>
+
+  <div class="about-section">
+    <div class="about-card" style="padding-bottom: 20px;">
+      <h3>
+        <svg class="section-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12,2 22,8 22,16 12,22 2,16 2,8"/><circle cx="12" cy="12" r="3"/></svg>
+        Our Pillars
+      </h3>
+      <div class="pillars-grid">
+        <div class="pillar-item">
+          <h4>Combat Excellence</h4>
+          <p>Skill-based battles emphasizing strategy, teamwork, and tactical coordination over individual performance.</p>
+        </div>
+        <div class="pillar-item">
+          <h4>Lore Accuracy</h4>
+          <p>Faithful recreation of Star Wars Legends and Canon military doctrine, customs, and organizational structures.</p>
+        </div>
+        <div class="pillar-item">
+          <h4>Meaningful Progression</h4>
+          <p>Rank advancement, specialized divisions, and structured pathways that reward dedication and growth.</p>
+        </div>
+        <div class="pillar-item">
+          <h4>Living Narrative</h4>
+          <p>Events, ceremonies, and story-driven operations where members actively shape the faction's ongoing history.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="about-cta">
+    <h3>Ready to Serve the Empire?</h3>
+    <p>Join thousands of members in the most immersive Star Wars experience in Saber Arena.</p>
+    <div class="cta-buttons">
+      <a href="https://discord.com/invite/bRE6W3CkBe" class="btn-primary">Join the Empire <span>&rarr;</span></a>
+      <a href="index.html" class="btn-secondary">Back to Home <span>&rarr;</span></a>
+    </div>
+  </div>
+
+</section>
+
+<footer id="site-footer">
+  <div class="footer-label">Galactic Status</div>
+  <div class="footer-ticker">
+    <div class="ticker-track">
+      <span>The Sith Empire continues its campaign across the galaxy. &nbsp;&bull;&nbsp; New outposts established in the Outer Rim. &nbsp;&bull;&nbsp; All citizens report to your sector commander. &nbsp;&bull;&nbsp; The Dark Side grows stronger. &nbsp;&bull;&nbsp;</span>
+      <span>The Sith Empire continues its campaign across the galaxy. &nbsp;&bull;&nbsp; New outposts established in the Outer Rim. &nbsp;&bull;&nbsp; All citizens report to your sector commander. &nbsp;&bull;&nbsp; The Dark Side grows stronger. &nbsp;&bull;&nbsp;</span>
+    </div>
+  </div>
+  <a href="map.html" class="footer-map-btn">View Map <span>&rarr;</span></a>
+</footer>
+
+<div class="particles" id="particles"></div>
+
+<script>
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 20; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.animationDelay = Math.random() * 8 + 's';
+  p.style.animationDuration = (6 + Math.random() * 6) + 's';
+  p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+  particlesContainer.appendChild(p);
+}
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('site-header');
+  header.style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(255,0,0,0.15)' : 'none';
+});
+</script>
+
+<script src="mobile.js" defer></script>
+</body>
+</html>

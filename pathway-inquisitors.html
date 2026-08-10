@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sith Inquisitors - The Sith Empire</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root { --bg-deep: #050000; --bg-secondary: #1A0000; --accent-red: #8B0000; --glow-red: #FF0000; --text-light: #E8DCC8; --text-dim: #666666; --gold: #DAA520; --border-steel: #333333; --font-display: 'Cinzel', serif; --font-body: 'Rajdhani', sans-serif; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg-deep); color: var(--text-light); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+#site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 80px; background: rgba(5,0,0,0.92); border-bottom: 1px solid var(--accent-red); backdrop-filter: blur(12px); display: flex; align-items: center; padding: 0 48px 0 34px; }
+.header-inner { width: 100%; margin: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+.logo-area { display: flex; align-items: center; gap: 12px; justify-self: start; }
+.logo-icon { width: 50px; height: 50px; }
+.logo-icon img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 6px rgba(255,0,0,0.5)); }
+.logo-text h1 { font-family: var(--font-display); font-size: 20px; font-weight: 900; background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 8px rgba(218,165,32,0.4)); letter-spacing: 3px; line-height: 1.1; }
+.logo-text span { font-size: 10px; font-weight: 600; color: #DAA520; letter-spacing: 4px; text-transform: uppercase; }
+.nav-links { display: flex; gap: 32px; align-items: center; justify-self: center; }
+.nav-links a { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #aaa; position: relative; padding: 4px 0; transition: color 0.3s ease; }
+.nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 50%; right: 50%; height: 2px; background: var(--glow-red); box-shadow: 0 0 6px var(--glow-red); transition: left 0.3s ease, right 0.3s ease; }
+.nav-links a:hover, .nav-links a.active { color: var(--glow-red); }
+.nav-links a:hover::after, .nav-links a.active::after { left: 0; right: 0; }
+.header-cta { display: flex; flex-direction: column; align-items: center; gap: 6px; justify-self: end; text-align: center; }
+.header-cta a { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); background: linear-gradient(to bottom, #7A0000, #500000); border: 2px solid var(--glow-red); padding: 10px 24px; box-shadow: 0 0 10px rgba(255,0,0,0.3); transition: all 0.3s ease; }
+.header-cta a:hover { background: linear-gradient(to bottom, #A00000, #700000); transform: scale(1.05); }
+.header-cta small { display: block; font-size: 11px; font-weight: 600; color: #DAA520; letter-spacing: 2px; text-transform: uppercase; text-align: center; }
+
+.pathway-hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; padding: 140px 48px 60px; position: relative; background: radial-gradient(ellipse at center, rgba(60,60,255,0.08) 0%, transparent 60%), var(--bg-deep); }
+.pathway-hero-content { text-align: center; max-width: 800px; }
+.pathway-symbol { width: 120px; height: 120px; margin: 0 auto 30px; animation: symbolFloat 4s ease-in-out infinite; }
+.pathway-symbol img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 20px rgba(60,100,255,0.5)); }
+@keyframes symbolFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.pathway-title { font-family: var(--font-display); font-size: clamp(44px, 5.5vw, 62px); font-weight: 900; background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(218,165,32,0.4)); letter-spacing: 4px; margin-bottom: 16px; }
+.pathway-subtitle { font-size: 18px; color: #6688FF; text-transform: uppercase; letter-spacing: 4px; margin-bottom: 24px; text-shadow: 0 0 8px rgba(60,100,255,0.4); }
+.pathway-desc { font-size: 16px; color: #bbb; line-height: 1.75; max-width: 600px; margin: 0 auto; }
+
+.pathway-content { max-width: 1200px; margin: 0 auto; padding: 60px 48px; }
+.content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.info-card { background: linear-gradient(135deg, rgba(26,0,0,0.8), rgba(5,0,0,0.9)); border: 1px solid var(--border-steel); padding: 32px; clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px)); }
+.info-card h3 { font-size: 20px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--glow-red); text-shadow: 0 0 6px rgba(255,0,0,0.3); margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(139,0,0,0.3); }
+.info-card p { font-size: 15px; color: #bbb; line-height: 1.7; margin-bottom: 12px; }
+.info-card ul { list-style: none; padding: 0; }
+.info-card ul li { padding: 8px 0; border-bottom: 1px solid rgba(139,0,0,0.1); color: #ccc; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+.info-card ul li::before { content: '>'; color: var(--glow-red); font-weight: bold; }
+.back-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 40px; font-size: 14px; font-weight: 600; color: var(--glow-red); text-transform: uppercase; letter-spacing: 2px; padding: 12px 24px; border: 1px solid var(--accent-red); transition: all 0.3s; }
+.back-link:hover { background: rgba(139,0,0,0.2); border-color: var(--glow-red); box-shadow: 0 0 10px rgba(255,0,0,0.2); }
+
+#site-footer { border-top: 1px solid var(--accent-red); border-bottom: 1px solid var(--accent-red); background: var(--bg-deep); padding: 16px 48px; display: flex; align-items: center; justify-content: space-between; }
+.footer-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--glow-red); flex-shrink: 0; }
+.footer-ticker { flex: 1; overflow: hidden; margin: 0 24px; position: relative; }
+.ticker-track { display: flex; white-space: nowrap; animation: ticker-scroll 30s linear infinite; }
+.ticker-track span { font-size: 13px; color: #999; letter-spacing: 1px; padding-right: 80px; }
+@keyframes ticker-scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+@media (max-width: 768px) {
+  #site-header { padding: 0 20px; }
+  .nav-links { display: none; }
+  .pathway-hero { padding: 120px 20px 40px; }
+  .pathway-title { font-size: 36px; }
+  .pathway-content { padding: 40px 20px; }
+  .content-grid { grid-template-columns: 1fr; }
+}
+
+
+
+/* === UNIVERSAL IMPERIAL NAVIGATION === */
+#site-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  background: rgba(5,0,0,0.92) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--accent-red, #8B0000) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(12px) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 48px 0 34px !important;
+}
+#site-header::before { content: none !important; display: none !important; }
+.header-inner {
+  width: 100% !important;
+  margin: 0 !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center !important;
+  gap: 20px !important;
+}
+.logo-area {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  justify-self: start !important;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+.logo-icon {
+  width: 50px !important;
+  height: 50px !important;
+  position: relative !important;
+  flex: 0 0 auto !important;
+}
+.logo-icon::before { content: none !important; display: none !important; animation: none !important; }
+.logo-icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 0 6px rgba(255,0,0,0.5)) !important;
+}
+.logo-text h1 {
+  font-family: 'Cinzel', serif !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+  filter: drop-shadow(0 0 8px rgba(218,165,32,0.4)) drop-shadow(0 2px 4px rgba(0,0,0,0.8)) !important;
+  letter-spacing: 3px !important;
+  line-height: 1.1 !important;
+  margin: 0 !important;
+}
+.logo-text span {
+  display: block !important;
+  margin-top: 0 !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  color: #DAA520 !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+.nav-links {
+  display: flex !important;
+  gap: 32px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  justify-self: center !important;
+  flex-wrap: nowrap !important;
+}
+.nav-links a {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  color: #aaa !important;
+  position: relative !important;
+  padding: 4px 0 !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease, text-shadow 0.3s ease !important;
+  transform: none !important;
+}
+.nav-links a::before { content: none !important; display: none !important; }
+.nav-links a::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 50% !important;
+  right: 50% !important;
+  width: auto !important;
+  height: 2px !important;
+  background: var(--glow-red, #FF0000) !important;
+  box-shadow: 0 0 6px var(--glow-red, #FF0000) !important;
+  transition: left 0.3s ease, right 0.3s ease !important;
+  transform: none !important;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--glow-red, #FF0000) !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+.nav-links a:hover::after,
+.nav-links a.active::after { left: 0 !important; right: 0 !important; }
+.header-cta {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  justify-self: end !important;
+  text-align: center !important;
+}
+.header-cta a {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: var(--text-light, #E8DCC8) !important;
+  background: linear-gradient(to bottom, #7A0000, #500000) !important;
+  border: 2px solid var(--glow-red, #FF0000) !important;
+  border-radius: 0 !important;
+  padding: 10px 24px !important;
+  box-shadow: 0 0 10px rgba(255,0,0,0.3) !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  isolation: auto !important;
+  overflow: visible !important;
+}
+.header-cta a::after { content: none !important; display: none !important; }
+.header-cta a:hover {
+  background: linear-gradient(to bottom, #A00000, #700000) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 0 20px rgba(255,0,0,0.5) !important;
+}
+.header-cta small {
+  display: block !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  color: #DAA520 !important;
+  letter-spacing: 1.25px !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+}
+@media (max-width: 1180px) {
+  #site-header { height: auto !important; min-height: 80px !important; padding: 12px 22px !important; }
+  .header-inner { grid-template-columns: 1fr !important; justify-items: center !important; gap: 12px !important; }
+  .logo-area, .header-cta { justify-self: center !important; }
+  .nav-links { flex-wrap: wrap !important; gap: 10px 20px !important; }
+}
+@media (max-width: 720px) {
+  #site-header { position: absolute !important; padding: 14px !important; }
+  .nav-links { gap: 9px 14px !important; }
+  .nav-links a { font-size: 11px !important; }
+  .header-cta a { padding: 9px 14px !important; font-size: 12px !important; }
+}
+
+
+/* === HERO RECENTERING AFTER EMBLEM REMOVAL === */
+.pathway-hero-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+.hero-eyebrow {
+  font-family: var(--font-display) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 8px !important;
+  line-height: 1.2 !important;
+  color: var(--glow-red) !important;
+  text-transform: uppercase !important;
+  margin: 0 0 12px !important;
+  text-shadow: 0 0 10px rgba(255,0,0,.45) !important;
+}
+@media (max-width:768px) {
+  .hero-eyebrow { font-size: 11px !important; letter-spacing: 4px !important; }
+}
+
+
+/* === INQUISITORS HIERARCHY GROUPS === */
+.hierarchy-group { margin-top: 18px; }
+.hierarchy-group h4 {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 2.5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.hierarchy-group ul { margin-top: 0; }
+
+</style>
+<link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+
+<style>
+.floating-emblem { position: relative; width: 110px; height: 110px; margin: 0 auto 18px; pointer-events: none; animation: emblemFloat 3.6s ease-in-out infinite; }
+.floating-emblem img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 14px rgba(80,120,255,0.75)) drop-shadow(0 0 28px rgba(80,120,255,0.35)); }
+.floating-emblem::after { content: ''; position: absolute; inset: -18px; border-radius: 50%; background: radial-gradient(circle, rgba(80,120,255,0.25) 0%, transparent 70%); z-index: -1; animation: emblemPulse 2.8s ease-in-out infinite; }
+@keyframes emblemFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+@keyframes emblemPulse { 0%, 100% { opacity: 0.6; transform: scale(0.95); } 50% { opacity: 1; transform: scale(1.1); } }
+@media (max-width: 768px) { .floating-emblem { width: 84px; height: 84px; margin-bottom: 14px; } }
+</style>
+
+<header id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-area">
+      <div class="logo-icon"><img src="ts-empire-symbol.png" alt="Sith Empire Symbol"></div>
+      <div class="logo-text">
+        <h1>THE SITH EMPIRE</h1>
+        <span>Order &middot; Power &middot; Destiny</span>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="hierarchy.html">Hierarchy</a>
+      <a href="common-etiquette.html">Common Etiquette</a>
+      <a href="rites-of-the-sith.html">Rites of the Sith</a>
+      <a href="law-and-order.html">Law and Order</a>
+      <a href="academy.html">Academy</a>
+      <a href="spheres.html">Spheres</a>
+      <a href="institutions.html">Institutions</a>
+      <a href="news.html">News</a>
+    </nav>
+    <div class="header-cta">
+      <a href="https://discord.com/invite/bRE6W3CkBe">Join the Empire</a>
+      <small>6000+ Members</small>
+    </div>
+  </div>
+</header>
+
+<section class="pathway-hero">
+  <div class="pathway-hero-content">
+    <div class="floating-emblem" aria-hidden="true"><img src="sith-inquisitors.png" alt=""></div>
+    <div class="hero-eyebrow">PATHWAY OF THE FORCE</div>
+    <h1 class="pathway-title">SITH INQUISITORS</h1>
+    <p class="pathway-subtitle">Uncover Secrets. Bend Reality.</p>
+    <p class="pathway-desc">The Sith Inquisitors are the Empire's masters of the Force. They delve into forbidden knowledge, manipulate the very fabric of reality, and serve as the Dark Council's most trusted agents of shadow and sorcery.</p>
+  </div>
+</section>
+
+<section class="pathway-content">
+  <div class="content-grid">
+    <div class="info-card">
+      <h3>Leadership</h3>
+      <p>The Sith Inquisitors are led by a master of the Dark Side whose authority is absolute.</p>
+      <div class="hierarchy-group">
+        <h4>PATHWAY LEADER</h4>
+        <ul>
+          <li>Darth Nero</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>Path Requirements</h3>
+      <p>Only those with exceptional Force sensitivity and an insatiable thirst for knowledge may become Inquisitors.</p>
+      <ul>
+        <li>Be Sith Warrior+</li>
+        <li>Participate in a Tryout</li>
+        <li>No previous violations regarding The Sith Empire's own established rules.</li>
+        <li>No previous expulsion from the Sith Inquisitors.</li>
+        <li>No previous violations regarding Saber Arena's own established rules.</li>
+      </ul>
+    </div>
+    <div class="info-card">
+      <h3>Sith Inquisitors Hierarchy</h3>
+      <p>The Inquisitor hierarchy values knowledge and power above all else.</p>
+      <div class="hierarchy-group">
+        <h4>LOW ECHELON</h4>
+        <ul>
+          <li>Servant</li>
+          <li>Aspirant</li>
+          <li>Adept</li>
+        </ul>
+      </div>
+      <div class="hierarchy-group">
+        <h4>MIDDLE ECHELON</h4>
+        <ul>
+          <li>Inquisitor</li>
+          <li>Enforcer</li>
+          <li>Arbiter</li>
+        </ul>
+      </div>
+      <div class="hierarchy-group">
+        <h4>UPPER ECHELON</h4>
+        <ul>
+          <li>Adjudicator</li>
+          <li>Justiciar</li>
+          <li>Grand Inquisitor</li>
+        </ul>
+      </div>
+    </div>
+    <div class="info-card">
+      <h3>Imperial Inquisition</h3>
+      <p>The Sith Inquisitors serve as the Empire's enforcers of authority. Cunning, adaptable, and relentless in their pursuit of power, they specialize in the judicial law and maintain legal order across the Empire.</p>
+      <ul>
+        <li>Investigation of corruption, treason, and sedition</li>
+        <li>Enforcement of Imperial law and Sith doctrine</li>
+        <li>Identification and neutralization of internal threats</li>
+        <li>Adjudication of disputes through Sith jurisprudence and authority</li>
+      </ul>
+    </div>
+  </div>
+  <a href="index.html" class="back-link">&larr; Return to the Empire</a>
+</section>
+
+<footer id="site-footer">
+  <div class="footer-label">Galactic Status</div>
+  <div class="footer-ticker">
+    <div class="ticker-track">
+      <span>The Inquisitors continue their search for ancient artifacts. &nbsp;&bull;&nbsp; The Dark Side reveals all. &nbsp;&bull;&nbsp; Knowledge is power. &nbsp;&bull;&nbsp;</span>
+      <span>The Inquisitors continue their search for ancient artifacts. &nbsp;&bull;&nbsp; The Dark Side reveals all. &nbsp;&bull;&nbsp; Knowledge is power. &nbsp;&bull;&nbsp;</span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="mobile.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imperial Institutions - The Sith Empire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-deep:#050000; --accent-red:#8B0000; --glow-red:#FF0000; --text-light:#E8DCC8; --text-dim:#999; --gold:#DAA520; --gold-bright:#FFD700; --border-steel:#333; --font-display:'Cinzel',serif; --font-body:'Rajdhani',sans-serif; --curator-pink:#F61F9B; --recruiter-white:#F8F8F0; --dread-yellow:#F1ED59;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: radial-gradient(circle at 20% 10%, rgba(122,77,255,.13), transparent 28rem), radial-gradient(circle at 80% 30%, rgba(139,0,0,.18), transparent 24rem), var(--bg-deep); color: var(--text-light); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    #site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 80px; background: rgba(5,0,0,0.92); border-bottom: 1px solid var(--accent-red); backdrop-filter: blur(12px); display: flex; align-items: center; padding: 0 48px 0 34px; }
+    .header-inner { width: 100%; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+    .logo-area { display: flex; align-items: center; gap: 12px; justify-self: start; }
+    .logo-icon { width: 50px; height: 50px; }
+    .logo-icon img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 6px rgba(255,0,0,.5)); }
+    .logo-text h1 { font-family: var(--font-display); font-size: 20px; font-weight: 900; background: linear-gradient(180deg,#FFD700 0%,#DAA520 30%,#B8860B 50%,#8B6914 70%,#DAA520 90%,#FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 8px rgba(218,165,32,.4)); letter-spacing: 3px; line-height: 1.1; }
+    .logo-text span { font-size: 10px; font-weight: 600; color: #DAA520; letter-spacing: 4px; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 24px; align-items: center; justify-self: center; }
+    .nav-links a { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.7px; color: #aaa; position: relative; padding: 4px 0; transition: color .3s ease; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 50%; right: 50%; height: 2px; background: var(--glow-red); box-shadow: 0 0 6px var(--glow-red); transition: left .3s ease, right .3s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--glow-red); }
+    .nav-links a:hover::after, .nav-links a.active::after { left: 0; right: 0; }
+    .institutions-hero { min-height: 68vh; padding: 140px 48px 70px; display: grid; place-items: center; position: relative; overflow: hidden; background: linear-gradient(180deg, rgba(5,0,0,.62), rgba(5,0,0,.96)); }
+    .institutions-hero::before { content: ''; position: absolute; inset: 10% 12%; border: 1px solid rgba(218,165,32,.18); transform: skewY(-4deg); box-shadow: inset 0 0 60px rgba(122,77,255,.08), 0 0 70px rgba(0,0,0,.4); }
+    .institutions-hero::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent 0 72px, rgba(218,165,32,.035) 73px, transparent 74px), repeating-linear-gradient(0deg, transparent 0 72px, rgba(255,0,0,.026) 73px, transparent 74px); opacity: .75; pointer-events: none; }
+    .hero-wrap { position: relative; z-index: 1; max-width: 900px; text-align: center; }
+    .hero-eyebrow { font-family: var(--font-display); letter-spacing: 10px; color: var(--glow-red); font-size: 12px; margin-bottom: 12px; text-shadow: 0 0 10px rgba(255,0,0,.45); }
+    .hero-title { font-family: var(--font-display); font-size: clamp(44px,5.5vw,62px); font-weight: 900; background: linear-gradient(180deg,#FFD700 0%,#DAA520 30%,#B8860B 50%,#8B6914 70%,#DAA520 90%,#FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(218,165,32,.4)); letter-spacing: 5px; line-height: 1; margin-bottom: 20px; }
+    .hero-tagline { display: inline-flex; align-items: center; gap: 14px; font-family: var(--font-display); letter-spacing: 6px; color: var(--gold); font-size: 13px; margin-bottom: 24px; text-transform: uppercase; }
+    .hero-tagline::before, .hero-tagline::after { content: ''; display: block; width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+    .hero-desc { max-width: 720px; margin: 0 auto; color: #ccc; font-size: 16px; line-height: 1.75; }
+    .institutions-shell { max-width: 1320px; margin: 0 auto; padding: 64px 48px 42px; }
+    .institution-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 34px; align-items: stretch; }
+    .institution { position: relative; min-height: 560px; padding: 34px; overflow: hidden; border: 1px solid rgba(218,165,32,.22); background: linear-gradient(145deg, rgba(18,0,0,.88), rgba(4,0,0,.96)); clip-path: polygon(0 0, calc(100% - 34px) 0, 100% 34px, 100% 100%, 34px 100%, 0 calc(100% - 34px)); box-shadow: 0 24px 80px rgba(0,0,0,.44); transition: transform .5s cubic-bezier(.2,.7,.2,1), border-color .5s ease, box-shadow .5s ease; }
+    .institution::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 22% 16%, var(--aura), transparent 42%), linear-gradient(135deg, rgba(255,255,255,.04), transparent 38%); opacity: .9; pointer-events: none; transition: opacity .5s ease, background .5s ease; }
+    .institution::after { content: ''; position: absolute; top: 24px; right: 24px; bottom: 24px; width: 1px; background: linear-gradient(transparent, var(--line), transparent); opacity: .65; transition: opacity .5s ease; }
+    .institution.curators { --aura: rgba(246,31,155,.22); --line: var(--curator-pink); --accent: var(--curator-pink); cursor: pointer; }
+
+    /* Curator card hover animation */
+    .institution.curators:hover { transform: translateY(-8px); border-color: var(--curator-pink); box-shadow: 0 30px 90px rgba(246,31,155,.32), 0 0 40px rgba(246,31,155,.18); }
+    .institution.curators:hover::before { opacity: 1; background: radial-gradient(circle at 22% 16%, rgba(246,31,155,.42), transparent 48%), linear-gradient(135deg, rgba(255,255,255,.06), transparent 40%); }
+    .institution.curators:hover::after { opacity: 1; }
+    .institution.curators .institution-seal { transition: transform .6s cubic-bezier(.2,.7,.2,1), box-shadow .5s ease; }
+    .institution.curators:hover .institution-seal { transform: rotate(6deg) scale(1.06); box-shadow: inset 0 0 40px rgba(0,0,0,.5), 0 0 44px rgba(246,31,155,.55); }
+    .institution.curators .seal-image { transition: filter .5s ease, transform .6s ease; }
+    .institution.curators:hover .seal-image { filter: drop-shadow(0 0 22px var(--curator-pink)) drop-shadow(0 0 42px rgba(246,31,155,.5)); animation: curatorSealFloat 2.6s ease-in-out infinite; }
+    .institution.curators .institution-name { transition: color .5s ease, text-shadow .5s ease, letter-spacing .5s ease; }
+    .institution.curators:hover .institution-name { color: #fff; text-shadow: 0 0 14px rgba(246,31,155,.6); letter-spacing: 4px; }
+    .institution.curators .institution-panel { transition: border-color .5s ease, background .5s ease; }
+    .institution.curators:hover .institution-panel { border-color: rgba(246,31,155,.32); background: rgba(24,0,16,.45); }
+    @keyframes curatorSealFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+
+    .institution.recruiters { --aura: rgba(255,255,255,.18); --line: var(--recruiter-white); --accent: var(--recruiter-white); background: linear-gradient(145deg, rgba(24,24,22,.88), rgba(4,4,4,.96)); border-color: rgba(248,248,240,.28); }
+    .institution.recruiters::before { background: radial-gradient(circle at 22% 16%, rgba(255,255,255,.2), transparent 42%), linear-gradient(135deg, rgba(255,255,255,.08), transparent 38%); }
+    .institution.recruiters .institution-mark { color: #fff; text-shadow: 0 0 12px rgba(255,255,255,.5); }
+    .institution.recruiters .institution-seal { background: radial-gradient(circle, rgba(255,255,255,.16), rgba(0,0,0,.32)); border-color: rgba(255,255,255,.28); box-shadow: inset 0 0 36px rgba(255,255,255,.04), 0 0 34px rgba(255,255,255,.16); }
+    .institution.recruiters .seal-image { width: 102px; height: 102px; filter: drop-shadow(0 0 18px rgba(255,255,255,.85)) drop-shadow(0 0 34px rgba(255,255,255,.35)); }
+    .institution.recruiters:hover { transform: translateY(-8px); border-color: #fff; box-shadow: 0 30px 90px rgba(255,255,255,.18), 0 0 40px rgba(255,255,255,.14); }
+    .institution.recruiters:hover::before { opacity: 1; background: radial-gradient(circle at 22% 16%, rgba(255,255,255,.34), transparent 48%), linear-gradient(135deg, rgba(255,255,255,.12), transparent 40%); }
+    .institution.recruiters:hover .institution-seal { transform: rotate(-5deg) scale(1.06); box-shadow: inset 0 0 40px rgba(255,255,255,.06), 0 0 48px rgba(255,255,255,.42); }
+    .institution.recruiters:hover .seal-image { filter: drop-shadow(0 0 24px #fff) drop-shadow(0 0 46px rgba(255,255,255,.58)); }
+    .institution.recruiters:hover .institution-name { color: #fff; text-shadow: 0 0 16px rgba(255,255,255,.58); letter-spacing: 4px; }
+    .institution.recruiters:hover .institution-panel { border-color: rgba(255,255,255,.34); background: rgba(255,255,255,.08); }
+
+    .institution.secret { border-color: #444; opacity: .72; cursor: default; }
+    .institution.secret .institution-content::before { content: ''; position: absolute; inset: -34px; z-index: 4; background: repeating-linear-gradient(45deg, rgba(0,0,0,.35) 0 6px, transparent 6px 12px); pointer-events: none; }
+    .institution.secret .seal-image { filter: brightness(.35) contrast(1.3); opacity: .7; }
+    .institution.secret .institution-name { color: #777; letter-spacing: 6px; }
+    .institution.secret .institution-desc { color: #555; }
+    .institution.secret .institution-motto, .institution.secret .institution-panel { color: #555; filter: grayscale(1) brightness(.62); opacity: .7; }
+    .institution.dreadmasters { --aura: rgba(241,237,89,.22); --line: var(--dread-yellow); --accent: var(--dread-yellow); }
+    .institution-content { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; }
+    .institution-mark { font-family: var(--font-display); color: var(--accent); font-size: 12px; letter-spacing: 6px; text-transform: uppercase; margin-bottom: 12px; }
+    .institution-name { font-family: var(--font-display); font-size: 32px; font-weight: 900; letter-spacing: 3px; line-height: 1.12; text-transform: uppercase; margin-bottom: 10px; color: var(--text-light); }
+    .institution-motto { font-family: var(--font-display); color: var(--gold); letter-spacing: 4px; font-size: 13px; text-transform: uppercase; margin-bottom: 22px; }
+    .institution-desc { color: #cfc9bb; font-size: 15px; line-height: 1.78; margin-bottom: 26px; }
+    .institution-leader {
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding: 8px 14px;
+      border-left: 3px solid var(--accent);
+      background: rgba(0,0,0,0.3);
+    }
+    .institution-leader-label {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 3px;
+      margin-right: 6px;
+    }
+    .institution-panel { border: 1px solid rgba(255,255,255,.09); background: rgba(0,0,0,.25); padding: 18px; margin-top: auto; }
+    .institution-panel h3 { font-family: var(--font-body); color: var(--accent); font-size: 14px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+    .institution-panel ul { list-style: none; display: grid; gap: 10px; }
+    .institution-panel li { position: relative; padding-left: 20px; color: #aaa; }
+    .institution-panel li::before { content: '◆'; position: absolute; left: 0; color: var(--accent); font-size: 10px; top: 3px; }
+    .institution-seal { width: 126px; height: 126px; margin-bottom: 24px; border: 1px solid rgba(255,255,255,.12); display: grid; place-items: center; position: relative; background: radial-gradient(circle, rgba(255,255,255,.08), rgba(0,0,0,.35)); box-shadow: inset 0 0 40px rgba(0,0,0,.5), 0 0 34px rgba(0,0,0,.35); }
+    .institution-seal::before, .institution-seal::after { content: ''; position: absolute; inset: 14px; border: 1px solid var(--accent); opacity: .55; transform: rotate(45deg); }
+    .institution-seal::after { inset: 31px; opacity: .35; transform: rotate(0deg); }
+    .seal-image { width: 92px; height: 92px; object-fit: contain; position: relative; z-index: 1; filter: drop-shadow(0 0 14px var(--accent)); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 46px; font-size: 13px; font-weight: 600; color: var(--glow-red); text-transform: uppercase; letter-spacing: 3px; padding: 12px 24px; border: 1px solid var(--accent-red); transition: all .3s ease; }
+    .back-link:hover { background: rgba(139,0,0,.2); border-color: var(--glow-red); box-shadow: 0 0 15px rgba(255,0,0,.2); }
+    #site-footer { background: var(--bg-deep); padding: 16px 48px; display: flex; align-items: center; justify-content: space-between; max-width: 100%; border-top: 1px solid rgba(218,165,32,.16); }
+    .footer-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--glow-red); flex-shrink: 0; }
+    .footer-ticker { flex: 1; overflow: hidden; margin: 0 24px; position: relative; }
+    .footer-ticker::before, .footer-ticker::after { content: ''; position: absolute; top: 0; bottom: 0; width: 40px; z-index: 1; }
+    .footer-ticker::before { left: 0; background: linear-gradient(to right, var(--bg-deep), transparent); }
+    .footer-ticker::after { right: 0; background: linear-gradient(to left, var(--bg-deep), transparent); }
+    .ticker-track { display: flex; white-space: nowrap; animation: ticker-scroll 30s linear infinite; }
+    .ticker-track span { font-size: 13px; color: #999; letter-spacing: 1px; padding-right: 80px; }
+    @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .footer-map-btn { flex-shrink: 0; font-family: var(--font-body); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--glow-red); border: 1px solid var(--accent-red); padding: 8px 16px; background: transparent; cursor: pointer; transition: all .3s; display: flex; align-items: center; gap: 6px; }
+    .footer-map-btn:hover { background: rgba(139,0,0,.2); border-color: var(--glow-red); box-shadow: 0 0 10px rgba(255,0,0,.2); }
+    @media (max-width:1180px) { #site-header { height: auto; min-height: 80px; padding: 12px 22px; } .header-inner { grid-template-columns: 1fr; justify-items: center; gap: 12px; } .logo-area { justify-self: center; } .nav-links { flex-wrap: wrap; justify-content: center; gap: 10px 20px; } .institution-grid { grid-template-columns: 1fr; } }
+    @media (max-width:720px) { .institutions-hero { padding: 128px 20px 54px; min-height: auto; } .hero-title { font-size: 39px; letter-spacing: 3px; } .hero-tagline { letter-spacing: 3px; } .hero-tagline::before, .hero-tagline::after { width: 34px; } .institutions-shell { padding: 42px 18px; } .institution { min-height: auto; padding: 26px; } #site-footer { flex-direction: column; gap: 12px; text-align: center; padding: 16px 20px; } .footer-ticker { margin: 0; } }
+
+/* === UNIVERSAL IMPERIAL NAVIGATION === */
+#site-header {
+  position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important;
+  z-index: 1000 !important; height: 80px !important; min-height: 80px !important;
+  background: rgba(5,0,0,0.92) !important; border: 0 !important;
+  border-bottom: 1px solid var(--accent-red, #8B0000) !important; border-radius: 0 !important;
+  box-shadow: none !important; backdrop-filter: blur(12px) !important;
+  display: flex !important; align-items: center !important; padding: 0 48px 0 34px !important;
+}
+#site-header::before { content: none !important; display: none !important; }
+.header-inner { width: 100% !important; margin: 0 !important; display: grid !important; grid-template-columns: 1fr auto 1fr !important; align-items: center !important; gap: 20px !important; }
+.logo-area { display: flex !important; align-items: center !important; gap: 12px !important; justify-self: start !important; color: inherit !important; text-decoration: none !important; }
+.logo-icon { width: 50px !important; height: 50px !important; position: relative !important; flex: 0 0 auto !important; }
+.logo-icon::before { content: none !important; display: none !important; animation: none !important; }
+.logo-icon img { width: 100% !important; height: 100% !important; object-fit: contain !important; filter: drop-shadow(0 0 6px rgba(255,0,0,0.5)) !important; }
+.logo-text h1 { font-family: 'Cinzel', serif !important; font-size: 20px !important; font-weight: 900 !important; background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%) !important; -webkit-background-clip: text !important; background-clip: text !important; -webkit-text-fill-color: transparent !important; text-shadow: none !important; filter: drop-shadow(0 0 8px rgba(218,165,32,0.4)) drop-shadow(0 2px 4px rgba(0,0,0,0.8)) !important; letter-spacing: 3px !important; line-height: 1.1 !important; margin: 0 !important; }
+.logo-text span { display: block !important; margin-top: 0 !important; font-family: 'Rajdhani', sans-serif !important; font-size: 10px !important; font-weight: 600 !important; color: #DAA520 !important; letter-spacing: 4px !important; text-transform: uppercase !important; white-space: nowrap !important; }
+.nav-links { display: flex !important; gap: 32px !important; align-items: center !important; justify-content: center !important; justify-self: center !important; flex-wrap: nowrap !important; }
+.nav-links a { font-family: 'Rajdhani', sans-serif !important; font-size: 14px !important; font-weight: 600 !important; text-transform: uppercase !important; letter-spacing: 2px !important; color: #aaa !important; position: relative !important; padding: 4px 0 !important; text-decoration: none !important; transition: color 0.3s ease, text-shadow 0.3s ease !important; transform: none !important; }
+.nav-links a::before { content: none !important; display: none !important; }
+.nav-links a::after { content: '' !important; position: absolute !important; bottom: -2px !important; left: 50% !important; right: 50% !important; width: auto !important; height: 2px !important; background: var(--glow-red, #FF0000) !important; box-shadow: 0 0 6px var(--glow-red, #FF0000) !important; transition: left 0.3s ease, right 0.3s ease !important; transform: none !important; }
+.nav-links a:hover, .nav-links a.active { color: var(--glow-red, #FF0000) !important; text-shadow: none !important; transform: none !important; }
+.nav-links a:hover::after, .nav-links a.active::after { left: 0 !important; right: 0 !important; }
+.header-cta { display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 2px !important; justify-self: end !important; text-align: center !important; }
+.header-cta a { font-family: 'Rajdhani', sans-serif !important; font-weight: 700 !important; font-size: 14px !important; line-height: 1 !important; text-transform: uppercase !important; letter-spacing: 1px !important; color: var(--text-light, #E8DCC8) !important; background: linear-gradient(to bottom, #7A0000, #500000) !important; border: 2px solid var(--glow-red, #FF0000) !important; border-radius: 0 !important; padding: 10px 24px !important; box-shadow: 0 0 10px rgba(255,0,0,0.3) !important; transition: all 0.3s ease !important; text-decoration: none !important; isolation: auto !important; overflow: visible !important; }
+.header-cta a::after { content: none !important; display: none !important; }
+.header-cta a:hover { background: linear-gradient(to bottom, #A00000, #700000) !important; transform: scale(1.05) !important; box-shadow: 0 0 20px rgba(255,0,0,0.5) !important; }
+.header-cta small { display: block !important; font-family: 'Rajdhani', sans-serif !important; font-size: 8px !important; line-height: 1 !important; font-weight: 600 !important; color: #DAA520 !important; letter-spacing: 1.25px !important; text-transform: uppercase !important; text-align: center !important; }
+  </style>
+  <link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+<header id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-area">
+      <div class="logo-icon"><img src="ts-empire-symbol.png" alt="Sith Empire Symbol"></div>
+      <div class="logo-text"><h1>THE SITH EMPIRE</h1><span>Order &middot; Power &middot; Destiny</span></div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="hierarchy.html">Hierarchy</a>
+      <a href="common-etiquette.html">Common Etiquette</a>
+      <a href="rites-of-the-sith.html">Rites of the Sith</a>
+      <a href="law-and-order.html">Law and Order</a>
+      <a href="academy.html">Academy</a>
+      <a href="spheres.html">Spheres</a>
+      <a href="institutions.html" class="active">Institutions</a>
+      <a href="news.html">News</a>
+    </nav>
+    <div class="header-cta">
+      <a href="https://discord.com/invite/bRE6W3CkBe">Join the Empire</a>
+      <small>6000+ Members</small>
+    </div>
+  </div>
+</header>
+<section class="institutions-hero">
+  <div class="hero-wrap">
+    <div class="hero-eyebrow">ORGANONS OF IMPERIAL MEMORY</div>
+    <h1 class="hero-title">IMPERIAL INSTITUTIONS</h1>
+    <div class="hero-tagline">Archive &nbsp;&middot;&nbsp; Vision &nbsp;&middot;&nbsp; Dominion</div>
+    <p class="hero-desc">Beyond the Spheres of open authority stand the institutions that preserve doctrine, interpret omens, and maintain the Empire's deeper machinery of continuity.</p>
+  </div>
+</section>
+<main class="institutions-shell">
+  <div class="institution-grid">
+    <a href="sith-curators.html" class="institution curators" style="display:block;color:inherit;text-decoration:none;">
+      <div class="institution-content">
+        <div class="institution-seal"><img class="seal-image" src="sith-curators-emblem.png" alt="Sith Curators emblem"></div>
+        <div class="institution-mark">Institution I &middot; Custodianship</div>
+        <h2 class="institution-name">Sith Curators</h2>
+        <div class="institution-motto">Preserve &middot; Classify &middot; Remember</div>
+        <p class="institution-desc">The Sith Curators safeguard the Empire's relics, chronicles, archives, and doctrinal records. They ensure that knowledge is not merely stored, but weaponized through careful classification and controlled access.</p>
+        <div class="institution-leader"><span class="institution-leader-label">Institution Leader:</span> Position Unfilled</div>
+        <div class="institution-panel">
+          <h3>Mandates</h3>
+          <ul>
+            <li>Maintain imperial archives, registers, and protected records.</li>
+            <li>Preserve artifacts, texts, and historical evidence of Sith authority.</li>
+            <li>Validate institutional doctrine before it enters official use.</li>
+          </ul>
+        </div>
+      </div>
+    </a>
+    <section class="institution recruiters">
+      <div class="institution-content">
+        <div class="institution-seal"><img class="seal-image" src="sith-recruiters-emblem.png" alt="The Sith Recruiters emblem"></div>
+        <div class="institution-mark">Institution II &middot; Recruitment</div>
+        <h2 class="institution-name">The Sith Recruiters</h2>
+        <div class="institution-motto">Seek &middot; Vet &middot; Enlist</div>
+        <p class="institution-desc">The Sith Recruiters identify worthy prospects, guide initiates toward the Empire, and uphold standards at the gates of imperial service. Their work strengthens the ranks by ensuring new members enter with discipline, purpose, and loyalty.</p>
+        <div class="institution-panel">
+          <h3>Mandates</h3>
+          <ul>
+            <li>Seek and engage prospective members of the Empire.</li>
+            <li>Vet recruits for discipline, loyalty, and rule compliance.</li>
+            <li>Guide accepted initiates toward the proper imperial pathway.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    <section class="institution dreadmasters secret">
+      <div class="institution-content">
+        <div class="institution-seal"><img class="seal-image" src="dreadmasters-emblem.png" alt="Classified institution emblem"></div>
+        <div class="institution-mark">Institution III &middot; Classified</div>
+        <h2 class="institution-name">???</h2>
+        <div class="institution-motto">???</div>
+        <p class="institution-desc">???</p>
+        <div class="institution-panel">
+          <h3>Classified</h3>
+          <ul>
+            <li>???</li>
+            <li>???</li>
+            <li>???</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+  <a href="index.html" class="back-link">&larr; Return to the Empire</a>
+</main>
+<footer id="site-footer">
+  <div class="footer-label">Galactic Status</div>
+  <div class="footer-ticker"><div class="ticker-track"><span>Imperial institutions maintain the memory and will of the Empire. &nbsp;&bull;&nbsp; Archives sealed by Curator authority. &nbsp;&bull;&nbsp; Dread doctrine under restricted review. &nbsp;&bull;&nbsp;</span><span>Imperial institutions maintain the memory and will of the Empire. &nbsp;&bull;&nbsp; Archives sealed by Curator authority. &nbsp;&bull;&nbsp; Dread doctrine under restricted review. &nbsp;&bull;&nbsp;</span></div></div>
+  <a href="map.html" class="footer-map-btn">View Map <span>&rarr;</span></a>
+</footer>
+
+</body>
+</html>

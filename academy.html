@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sith Academy - The Sith Empire</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-deep: #050000;
+  --bg-secondary: #1A0000;
+  --accent-red: #8B0000;
+  --glow-red: #FF0000;
+  --text-light: #E8DCC8;
+  --text-dim: #666666;
+  --gold: #DAA520;
+  --border-steel: #333333;
+  --font-display: 'Cinzel', serif;
+  --font-body: 'Rajdhani', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body { background: var(--bg-deep); color: var(--text-light); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+a { text-decoration: none; color: inherit; }
+
+/* Header */
+#site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 80px; background: rgba(5,0,0,0.92); border-bottom: 1px solid var(--accent-red); backdrop-filter: blur(12px); display: flex; align-items: center; padding: 0 48px 0 34px; }
+.header-inner { width: 100%; margin: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+.logo-area { display: flex; align-items: center; gap: 12px; justify-self: start; }
+.logo-icon { width: 50px; height: 50px; }
+.logo-icon img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 6px rgba(255,0,0,0.5)); }
+.logo-text h1 { font-family: var(--font-display); font-size: 20px; font-weight: 900; background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 8px rgba(218,165,32,0.4)); letter-spacing: 3px; line-height: 1.1; }
+.logo-text span { font-size: 10px; font-weight: 600; color: #DAA520; letter-spacing: 4px; text-transform: uppercase; }
+.nav-links { display: flex; gap: 32px; align-items: center; justify-self: center; }
+.nav-links a { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #aaa; position: relative; padding: 4px 0; transition: color 0.3s ease; }
+.nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 50%; right: 50%; height: 2px; background: var(--glow-red); box-shadow: 0 0 6px var(--glow-red); transition: left 0.3s ease, right 0.3s ease; }
+.nav-links a:hover, .nav-links a.active { color: var(--glow-red); }
+.nav-links a:hover::after, .nav-links a.active::after { left: 0; right: 0; }
+.header-cta { display: flex; flex-direction: column; align-items: center; gap: 6px; justify-self: end; text-align: center; }
+.header-cta a { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); background: linear-gradient(to bottom, #7A0000, #500000); border: 2px solid var(--glow-red); padding: 10px 24px; box-shadow: 0 0 10px rgba(255,0,0,0.3); transition: all 0.3s ease; }
+.header-cta a:hover { background: linear-gradient(to bottom, #A00000, #700000); transform: scale(1.05); box-shadow: 0 0 20px rgba(255,0,0,0.5); }
+.header-cta small { display: block; font-size: 11px; font-weight: 600; color: #DAA520; letter-spacing: 2px; text-transform: uppercase; text-align: center; }
+
+/* Hero */
+.academy-hero { min-height: 50vh; display: flex; align-items: center; justify-content: center; padding: 140px 48px 60px; position: relative; background: radial-gradient(ellipse at center, rgba(218,165,32,0.08) 0%, transparent 60%), var(--bg-deep); }
+.academy-hero-content { text-align: center; max-width: 800px; }
+.academy-symbol { width: 100px; height: 100px; margin: 0 auto 30px; animation: symbolFloat 4s ease-in-out infinite; }
+.academy-symbol img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 20px rgba(218,165,32,0.5)); }
+@keyframes symbolFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+.academy-title { font-family: var(--font-display); font-size: clamp(44px, 5.5vw, 62px); font-weight: 900; background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 20px rgba(218,165,32,0.4)); letter-spacing: 4px; margin-bottom: 16px; }
+.academy-subtitle { font-size: 18px; color: var(--gold); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 24px; text-shadow: 0 0 8px rgba(218,165,32,0.4); }
+.academy-desc { font-size: 16px; color: #bbb; line-height: 1.75; max-width: 700px; margin: 0 auto; }
+
+/* Progression Timeline */
+.academy-progression { max-width: 1200px; margin: 0 auto; padding: 60px 48px; position: relative; }
+.academy-progression::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, var(--border-steel) 0%, var(--gold) 30%, var(--accent-red) 60%, var(--glow-red) 80%, var(--gold) 100%);
+  transform: translateX(-50%);
+  z-index: 0;
+  box-shadow: 0 0 10px rgba(218,165,32,0.2);
+}
+
+/* Level cards */
+.level-card { 
+  position: relative; 
+  margin-bottom: 60px; 
+  z-index: 1; 
+  transition: all 0.4s ease;
+  width: 45%;
+}
+.level-card:hover { transform: translateY(-5px); }
+.level-card:last-child { margin-bottom: 0; }
+
+/* Alternating layout */
+.level-card:nth-child(odd) {
+  margin-right: auto;
+  margin-left: 0;
+}
+.level-card:nth-child(even) {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.level-card-inner {
+  background: linear-gradient(135deg, rgba(26,0,0,0.9), rgba(5,0,0,0.95));
+  border: 2px solid var(--border-steel);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.level-card-inner::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+}
+.level-card:hover .level-card-inner { box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
+
+.level-header { padding: 28px 36px; display: flex; align-items: center; gap: 20px; position: relative; }
+.level-header::after { content: ''; position: absolute; bottom: 0; left: 36px; right: 36px; height: 1px; background: linear-gradient(90deg, transparent, currentColor, transparent); opacity: 0.2; }
+
+.level-badge {
+  width: 70px; height: 70px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 900;
+  position: relative;
+  animation: badgePulse 3s ease-in-out infinite;
+}
+@keyframes badgePulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.2); } }
+
+.level-title-group { flex: 1; }
+.level-rank { font-family: var(--font-display); font-size: 28px; font-weight: 700; letter-spacing: 2px; margin-bottom: 4px; }
+.level-name { font-size: 15px; text-transform: uppercase; letter-spacing: 3px; opacity: 0.9; font-weight: 600; }
+
+.level-body { padding: 28px 36px; }
+.level-description { font-size: 16px; color: #bbb; line-height: 1.75; margin-bottom: 20px; }
+.level-topics { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+.level-topic { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 14px; color: #999; }
+.level-topic::before { content: '▸'; font-size: 12px; flex-shrink: 0; }
+
+/* Acolyte I - Gold */
+.acolyte-1 .level-card-inner { border-color: var(--gold); }
+.acolyte-1 .level-card-inner::before { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.acolyte-1 .level-header { color: var(--gold); }
+.acolyte-1 .level-badge { background: radial-gradient(circle, rgba(218,165,32,0.3), rgba(218,165,32,0.05)); border: 2px solid var(--gold); color: var(--gold); box-shadow: 0 0 25px rgba(218,165,32,0.4); }
+.acolyte-1 .level-rank { color: var(--gold); }
+.acolyte-1 .level-name { color: var(--gold); }
+.acolyte-1 .level-topic::before { color: var(--gold); }
+.acolyte-1:hover .level-card-inner { box-shadow: 0 10px 40px rgba(218,165,32,0.2); }
+
+/* Acolyte II - Red */
+.acolyte-2 .level-card-inner { border-color: var(--accent-red); }
+.acolyte-2 .level-card-inner::before { background: linear-gradient(90deg, transparent, var(--glow-red), transparent); }
+.acolyte-2 .level-header { color: var(--glow-red); }
+.acolyte-2 .level-badge { background: radial-gradient(circle, rgba(255,0,0,0.2), rgba(139,0,0,0.05)); border: 2px solid var(--glow-red); color: var(--glow-red); box-shadow: 0 0 25px rgba(255,0,0,0.3); }
+.acolyte-2 .level-rank { color: var(--glow-red); }
+.acolyte-2 .level-name { color: var(--glow-red); }
+.acolyte-2 .level-topic::before { color: var(--glow-red); }
+.acolyte-2:hover .level-card-inner { box-shadow: 0 10px 40px rgba(255,0,0,0.15); }
+
+/* Acolyte III - Dark crimson */
+.acolyte-3 .level-card-inner { border-color: #aa0000; }
+.acolyte-3 .level-card-inner::before { background: linear-gradient(90deg, transparent, #cc0000, transparent); }
+.acolyte-3 .level-header { color: #cc0000; }
+.acolyte-3 .level-badge { background: radial-gradient(circle, rgba(204,0,0,0.2), rgba(139,0,0,0.05)); border: 2px solid #cc0000; color: #cc0000; box-shadow: 0 0 25px rgba(204,0,0,0.3); }
+.acolyte-3 .level-rank { color: #cc0000; }
+.acolyte-3 .level-name { color: #cc0000; }
+.acolyte-3 .level-topic::before { color: #cc0000; }
+.acolyte-3:hover .level-card-inner { box-shadow: 0 10px 40px rgba(204,0,0,0.15); }
+
+/* Adept - Gold premium */
+.adept .level-card-inner { border-color: var(--gold); background: linear-gradient(135deg, rgba(40,20,0,0.9), rgba(15,5,0,0.95)); }
+.adept .level-card-inner::before { background: linear-gradient(90deg, transparent, var(--gold), transparent); height: 6px; }
+.adept .level-header { color: var(--gold); }
+.adept .level-badge { width: 90px; height: 90px; font-size: 2rem; background: radial-gradient(circle, rgba(218,165,32,0.4), rgba(218,165,32,0.05)); border: 3px solid var(--gold); color: var(--gold); box-shadow: 0 0 35px rgba(218,165,32,0.5); }
+.adept .level-rank { color: var(--gold); font-size: 32px; }
+.adept .level-name { color: var(--gold); }
+.adept .level-topic::before { color: var(--gold); }
+.adept:hover .level-card-inner { box-shadow: 0 10px 50px rgba(218,165,32,0.3); }
+
+/* Connector dots on timeline */
+.level-connector {
+  position: absolute;
+  top: 40px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  z-index: 2;
+  border: 2px solid;
+}
+
+/* Odd cards - connector on right side */
+.level-card:nth-child(odd) .level-connector {
+  right: -8%;
+  transform: translateX(50%);
+}
+
+/* Even cards - connector on left side */
+.level-card:nth-child(even) .level-connector {
+  left: -8%;
+  transform: translateX(-50%);
+}
+
+.acolyte-1 .level-connector { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 12px rgba(218,165,32,0.6); }
+.acolyte-2 .level-connector { background: var(--glow-red); border-color: var(--glow-red); box-shadow: 0 0 12px rgba(255,0,0,0.5); }
+.acolyte-3 .level-connector { background: #cc0000; border-color: #cc0000; box-shadow: 0 0 12px rgba(204,0,0,0.5); }
+.adept .level-connector { background: var(--gold); border-color: var(--gold); box-shadow: 0 0 15px rgba(218,165,32,0.7); width: 20px; height: 20px; }
+
+/* Connecting lines from cards to timeline */
+.level-card:nth-child(odd)::after {
+  content: '';
+  position: absolute;
+  top: 47px;
+  right: -8%;
+  width: 8%;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.3;
+}
+.level-card:nth-child(even)::after {
+  content: '';
+  position: absolute;
+  top: 47px;
+  left: -8%;
+  width: 8%;
+  height: 2px;
+  background: currentColor;
+  opacity: 0.3;
+}
+
+/* Footer */
+#site-footer { border-top: 1px solid var(--accent-red); border-bottom: 1px solid var(--accent-red); background: var(--bg-deep); padding: 16px 48px; display: flex; align-items: center; justify-content: space-between; }
+.footer-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--glow-red); flex-shrink: 0; }
+.footer-ticker { flex: 1; overflow: hidden; margin: 0 24px; position: relative; }
+.ticker-track { display: flex; white-space: nowrap; animation: tickerScroll 30s linear infinite; }
+.ticker-track span { font-size: 13px; color: #999; letter-spacing: 1px; padding-right: 80px; }
+@keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.footer-map-btn { flex-shrink: 0; font-family: var(--font-body); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--glow-red); border: 1px solid var(--accent-red); padding: 8px 16px; background: transparent; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 6px; }
+.footer-map-btn:hover { background: rgba(139,0,0,0.2); border-color: var(--glow-red); box-shadow: 0 0 10px rgba(255,0,0,0.2); }
+
+/* Particles */
+.particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.particle { position: absolute; width: 2px; height: 2px; background: var(--glow-red); border-radius: 50%; opacity: 0; animation: particleDrift 8s linear infinite; }
+@keyframes particleDrift { 0% { opacity: 0; transform: translateY(100vh) scale(0); } 10% { opacity: 0.6; } 90% { opacity: 0.2; } 100% { opacity: 0; transform: translateY(-10vh) scale(1); } }
+
+@media (max-width: 1024px) {
+  .level-topics { grid-template-columns: 1fr; }
+  .level-card { width: 48%; }
+}
+@media (max-width: 768px) {
+  #site-header { padding: 0 20px; }
+  .nav-links { display: none; }
+  .academy-hero { padding: 120px 20px 40px; }
+  .academy-title { font-size: 36px; }
+  .academy-progression { padding: 40px 20px; }
+  .academy-progression::before { left: 24px; }
+  .level-connector { left: 24px; }
+  
+  /* Stack cards on mobile */
+  .level-card,
+  .level-card:nth-child(odd),
+  .level-card:nth-child(even) { 
+    width: 100%;
+    margin-left: 50px;
+    margin-right: 0;
+  }
+  
+  /* Reset connectors for mobile */
+  .level-card:nth-child(odd) .level-connector,
+  .level-card:nth-child(even) .level-connector {
+    left: -50px;
+    right: auto;
+    transform: translateX(-50%);
+  }
+  
+  /* Hide connecting lines on mobile */
+  .level-card::after {
+    display: none;
+  }
+  
+  .level-header { padding: 20px; flex-direction: column; text-align: center; }
+  .level-header::after { left: 20px; right: 20px; }
+  .level-body { padding: 20px; }
+  .level-rank { font-size: 22px; }
+  .adept .level-rank { font-size: 24px; }
+  .level-badge { width: 56px; height: 56px; font-size: 1.3rem; }
+  .adept .level-badge { width: 70px; height: 70px; font-size: 1.6rem; }
+  #site-footer { flex-direction: column; gap: 12px; text-align: center; }
+  .footer-ticker { margin: 0; }
+}
+
+
+
+
+
+/* === ACADEMY FORMAT RESTORE WITH NEW VISUALS === */
+.academy-hero { position:relative !important; min-height:62vh !important; display:flex !important; align-items:center !important; justify-content:center !important; padding:140px 48px 60px !important; overflow:hidden !important; background: radial-gradient(ellipse at 50% 50%, rgba(120,0,80,.12) 0%, transparent 60%), linear-gradient(180deg,#050000 0%,#100010 50%,#050000 100%) !important; }
+.academy-hero::before,.academy-hero::after { content:'' !important; position:absolute !important; left:50% !important; top:50% !important; border-radius:50% !important; pointer-events:none !important; }
+.academy-hero::before { width:760px !important; height:760px !important; border:1px dashed rgba(218,165,32,.24) !important; transform:translate(-50%,-50%) !important; animation:academyFormatSpin 60s linear infinite !important; }
+.academy-hero::after { width:470px !important; height:470px !important; border:1px dotted rgba(255,0,0,.35) !important; transform:translate(-50%,-50%) !important; animation:academyFormatSpin 40s linear infinite reverse !important; }
+@keyframes academyFormatSpin { to { transform:translate(-50%,-50%) rotate(360deg); } }
+.academy-hero-content { position:relative !important; z-index:1 !important; text-align:center !important; max-width:800px !important; }
+.academy-symbol { width:100px !important; height:100px !important; margin:0 auto 30px !important; display:block !important; animation:symbolFloat 4s ease-in-out infinite !important; }
+.academy-symbol img { width:100% !important; height:100% !important; object-fit:contain !important; filter:drop-shadow(0 0 22px rgba(218,165,32,.55)) !important; }
+.academy-title { font-family:var(--font-display) !important; font-size:clamp(44px, 5.5vw, 62px) !important; font-weight:900 !important; background:linear-gradient(180deg,#FFD700 0%,#DAA520 30%,#B8860B 50%,#8B6914 70%,#DAA520 90%,#FFD700 100%) !important; -webkit-background-clip:text !important; -webkit-text-fill-color:transparent !important; background-clip:text !important; filter:drop-shadow(0 0 20px rgba(218,165,32,.4)) !important; letter-spacing:4px !important; margin-bottom:16px !important; }
+.academy-subtitle { font-size:18px !important; color:var(--gold) !important; text-transform:uppercase !important; letter-spacing:4px !important; margin-bottom:24px !important; text-shadow:0 0 8px rgba(218,165,32,.4) !important; }
+.academy-subtitle::before,.academy-subtitle::after { content:none !important; display:none !important; }
+.academy-desc { font-size:16px !important; color:#bbb !important; line-height:1.75 !important; max-width:700px !important; margin:0 auto !important; }
+.academy-progression { max-width:1200px !important; margin:0 auto !important; padding:60px 48px !important; position:relative !important; }
+.academy-progression::before { content:'' !important; display:block !important; position:absolute !important; left:50% !important; top:0 !important; bottom:0 !important; width:2px !important; background:linear-gradient(to bottom, var(--border-steel) 0%, var(--gold) 30%, var(--accent-red) 60%, var(--glow-red) 80%, var(--gold) 100%) !important; transform:translateX(-50%) !important; z-index:0 !important; box-shadow:0 0 12px rgba(218,165,32,.25) !important; }
+.level-card,.level-card:nth-child(odd),.level-card:nth-child(even) { position:relative !important; margin-bottom:60px !important; z-index:1 !important; width:45% !important; transition:all .4s ease !important; }
+.level-card:nth-child(odd) { margin-right:auto !important; margin-left:0 !important; }
+.level-card:nth-child(even) { margin-left:auto !important; margin-right:0 !important; }
+.level-card:hover { transform:translateY(-5px) !important; }
+.level-card:last-child { margin-bottom:0 !important; }
+.level-card-inner { display:block !important; grid-template-columns:none !important; gap:0 !important; padding:0 !important; position:relative !important; overflow:hidden !important; border-radius:0 !important; background:linear-gradient(135deg, rgba(26,0,0,.9), rgba(5,0,0,.95)) !important; border:2px solid var(--border-steel) !important; transition:all .3s ease !important; box-shadow:0 18px 55px rgba(0,0,0,.28) !important; }
+.level-card-inner::before { content:'' !important; position:absolute !important; top:0 !important; left:0 !important; right:0 !important; bottom:auto !important; height:4px !important; background:linear-gradient(90deg, transparent, currentColor, transparent) !important; pointer-events:none !important; opacity:1 !important; }
+.level-card:hover .level-card-inner { box-shadow:0 14px 45px rgba(0,0,0,.55), 0 0 26px rgba(255,0,0,.12) !important; }
+.level-header { min-height:0 !important; padding:28px 36px !important; display:flex !important; flex-direction:row !important; align-items:center !important; justify-content:flex-start !important; gap:20px !important; text-align:left !important; position:relative !important; }
+.level-header::after { content:'' !important; display:block !important; position:absolute !important; bottom:0 !important; left:36px !important; right:36px !important; height:1px !important; background:linear-gradient(90deg, transparent, currentColor, transparent) !important; opacity:.2 !important; }
+.level-badge { width:70px !important; height:70px !important; flex-shrink:0 !important; border-radius:50% !important; display:flex !important; align-items:center !important; justify-content:center !important; font-family:var(--font-display) !important; font-size:1.6rem !important; font-weight:900 !important; position:relative !important; animation:badgePulse 3s ease-in-out infinite !important; }
+.level-badge::before,.level-badge::after { content:none !important; display:none !important; }
+.level-title-group { flex:1 !important; }
+.level-rank { font-family:var(--font-display) !important; font-size:28px !important; font-weight:700 !important; letter-spacing:2px !important; margin-bottom:4px !important; line-height:1.1 !important; }
+.level-name { font-family:var(--font-body) !important; font-size:15px !important; text-transform:uppercase !important; letter-spacing:3px !important; opacity:.9 !important; font-weight:600 !important; }
+.level-body { padding:28px 36px !important; }
+.level-description { font-size:16px !important; color:#bbb !important; line-height:1.75 !important; margin-bottom:20px !important; }
+.level-topics { display:grid !important; grid-template-columns:1fr 1fr !important; gap:8px 24px !important; }
+.level-topic { display:flex !important; align-items:center !important; gap:10px !important; padding:8px 0 !important; background:transparent !important; border:0 !important; color:#999 !important; font-size:14px !important; transition:none !important; }
+.level-topic:hover { transform:none !important; box-shadow:none !important; background:transparent !important; }
+.level-topic::before { content:'▸' !important; font-size:12px !important; flex-shrink:0 !important; }
+.level-connector { display:block !important; position:absolute !important; top:40px !important; width:16px !important; height:16px !important; border-radius:50% !important; z-index:2 !important; border:2px solid !important; }
+.level-card:nth-child(odd) .level-connector { right:-8% !important; transform:translateX(50%) !important; }
+.level-card:nth-child(even) .level-connector { left:-8% !important; transform:translateX(-50%) !important; }
+.level-card:nth-child(odd)::after { content:'' !important; display:block !important; position:absolute !important; top:47px !important; right:-8% !important; width:8% !important; height:2px !important; background:currentColor !important; opacity:.3 !important; }
+.level-card:nth-child(even)::after { content:'' !important; display:block !important; position:absolute !important; top:47px !important; left:-8% !important; width:8% !important; height:2px !important; background:currentColor !important; opacity:.3 !important; }
+@media (max-width:1024px) { .level-topics { grid-template-columns:1fr !important; } .level-card { width:48% !important; } }
+@media (max-width:768px) { .academy-hero { padding:120px 20px 40px !important; } .academy-title { font-size:36px !important; } .academy-progression { padding:40px 20px !important; } .academy-progression::before { left:24px !important; } .level-connector { left:24px !important; } .level-card,.level-card:nth-child(odd),.level-card:nth-child(even) { width:100% !important; margin-left:50px !important; margin-right:0 !important; } .level-card:nth-child(odd) .level-connector,.level-card:nth-child(even) .level-connector { left:-50px !important; right:auto !important; transform:translateX(-50%) !important; } .level-card::after,.level-card:nth-child(odd)::after,.level-card:nth-child(even)::after { display:none !important; } .level-header { padding:20px !important; flex-direction:column !important; text-align:center !important; } .level-body { padding:20px !important; } }
+
+/* === UNIVERSAL IMPERIAL NAVIGATION === */
+#site-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  background: rgba(5,0,0,0.92) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--accent-red, #8B0000) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(12px) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 48px 0 34px !important;
+}
+#site-header::before { content: none !important; display: none !important; }
+.header-inner {
+  width: 100% !important;
+  margin: 0 !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center !important;
+  gap: 20px !important;
+}
+.logo-area {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  justify-self: start !important;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+.logo-icon {
+  width: 50px !important;
+  height: 50px !important;
+  position: relative !important;
+  flex: 0 0 auto !important;
+}
+.logo-icon::before { content: none !important; display: none !important; animation: none !important; }
+.logo-icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 0 6px rgba(255,0,0,0.5)) !important;
+}
+.logo-text h1 {
+  font-family: 'Cinzel', serif !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+  filter: drop-shadow(0 0 8px rgba(218,165,32,0.4)) drop-shadow(0 2px 4px rgba(0,0,0,0.8)) !important;
+  letter-spacing: 3px !important;
+  line-height: 1.1 !important;
+  margin: 0 !important;
+}
+.logo-text span {
+  display: block !important;
+  margin-top: 0 !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  color: #DAA520 !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+.nav-links {
+  display: flex !important;
+  gap: 32px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  justify-self: center !important;
+  flex-wrap: nowrap !important;
+}
+.nav-links a {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  color: #aaa !important;
+  position: relative !important;
+  padding: 4px 0 !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease, text-shadow 0.3s ease !important;
+  transform: none !important;
+}
+.nav-links a::before { content: none !important; display: none !important; }
+.nav-links a::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 50% !important;
+  right: 50% !important;
+  width: auto !important;
+  height: 2px !important;
+  background: var(--glow-red, #FF0000) !important;
+  box-shadow: 0 0 6px var(--glow-red, #FF0000) !important;
+  transition: left 0.3s ease, right 0.3s ease !important;
+  transform: none !important;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--glow-red, #FF0000) !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+.nav-links a:hover::after,
+.nav-links a.active::after { left: 0 !important; right: 0 !important; }
+.header-cta {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  justify-self: end !important;
+  text-align: center !important;
+}
+.header-cta a {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: var(--text-light, #E8DCC8) !important;
+  background: linear-gradient(to bottom, #7A0000, #500000) !important;
+  border: 2px solid var(--glow-red, #FF0000) !important;
+  border-radius: 0 !important;
+  padding: 10px 24px !important;
+  box-shadow: 0 0 10px rgba(255,0,0,0.3) !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  isolation: auto !important;
+  overflow: visible !important;
+}
+.header-cta a::after { content: none !important; display: none !important; }
+.header-cta a:hover {
+  background: linear-gradient(to bottom, #A00000, #700000) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 0 20px rgba(255,0,0,0.5) !important;
+}
+.header-cta small {
+  display: block !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  color: #DAA520 !important;
+  letter-spacing: 1.25px !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+}
+@media (max-width: 1180px) {
+  #site-header { height: auto !important; min-height: 80px !important; padding: 12px 22px !important; }
+  .header-inner { grid-template-columns: 1fr !important; justify-items: center !important; gap: 12px !important; }
+  .logo-area, .header-cta { justify-self: center !important; }
+  .nav-links { flex-wrap: wrap !important; gap: 10px 20px !important; }
+}
+@media (max-width: 720px) {
+  #site-header { position: absolute !important; padding: 14px !important; }
+  .nav-links { gap: 9px 14px !important; }
+  .nav-links a { font-size: 11px !important; }
+  .header-cta a { padding: 9px 14px !important; font-size: 12px !important; }
+}
+
+
+/* === HERO RECENTERING AFTER EMBLEM REMOVAL === */
+.academy-hero-content {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+.hero-eyebrow {
+  font-family: var(--font-display) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  letter-spacing: 8px !important;
+  line-height: 1.2 !important;
+  color: var(--glow-red) !important;
+  text-transform: uppercase !important;
+  margin: 0 0 12px !important;
+  text-shadow: 0 0 10px rgba(255,0,0,.45) !important;
+}
+@media (max-width:768px) {
+  .hero-eyebrow { font-size: 11px !important; letter-spacing: 4px !important; }
+}
+
+</style>
+<link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+
+<header id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-area">
+      <div class="logo-icon"><img src="ts-empire-symbol.png" alt="Sith Empire Symbol"></div>
+      <div class="logo-text">
+        <h1>THE SITH EMPIRE</h1>
+        <span>Order &middot; Power &middot; Destiny</span>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="hierarchy.html">Hierarchy</a>
+      <a href="common-etiquette.html">Common Etiquette</a>
+      <a href="rites-of-the-sith.html">Rites of the Sith</a>
+      <a href="law-and-order.html">Law and Order</a>
+      <a href="academy.html" class="active">Academy</a>
+      <a href="spheres.html">Spheres</a>
+      <a href="institutions.html">Institutions</a>
+      <a href="news.html">News</a>
+    </nav>
+    <div class="header-cta">
+      <a href="https://discord.com/invite/bRE6W3CkBe">Join the Empire</a>
+      <small>6000+ Members</small>
+    </div>
+  </div>
+</header>
+
+<section class="academy-hero">
+  <div class="academy-hero-content">
+    <div class="hero-eyebrow">ORDER OF ASCENSION</div>
+    <h1 class="academy-title">SITH ACADEMY</h1>
+    <p class="academy-subtitle">The Crucible of Power</p>
+    <p class="academy-desc">The path to power begins with discipline. Through rigorous training and unwavering commitment, you will ascend from Acolyte to Adept, mastering the arts of combat, strategy, and the dark side.</p>
+  </div>
+</section>
+
+<section class="academy-progression">
+
+  <div class="level-card acolyte-1">
+    <div class="level-connector"></div>
+    <div class="level-card-inner">
+      <div class="level-header">
+        <div class="level-badge">I</div>
+        <div class="level-title-group">
+          <div class="level-rank">ACOLYTE I</div>
+          <div class="level-name">Imperial Induction</div>
+        </div>
+      </div>
+      <div class="level-body">
+        <p class="level-description">Your journey begins here. Imperial Induction introduces you to the foundations of the Sith Empire — its history, hierarchy, and the code that governs all who serve the dark side.</p>
+        <div class="level-topics">
+          <div class="level-topic">Faction introductory material</div>
+          <div class="level-topic">Understanding the hierarchy</div>
+          <div class="level-topic">The Sith Code and its principles</div>
+          <div class="level-topic">Imperial customs and protocols</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="level-card acolyte-2">
+    <div class="level-connector"></div>
+    <div class="level-card-inner">
+      <div class="level-header">
+        <div class="level-badge">II</div>
+        <div class="level-title-group">
+          <div class="level-rank">ACOLYTE II</div>
+          <div class="level-name">Martial Foundation</div>
+        </div>
+      </div>
+      <div class="level-body">
+        <p class="level-description">With knowledge of the Empire established, you now turn to the blade. Martial Foundation teaches the basics of combat — stance, form, and the discipline required to wield power effectively.</p>
+        <div class="level-topics">
+          <div class="level-topic">Combat material and fundamentals</div>
+          <div class="level-topic">Basic Force applications in battle</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="level-card acolyte-3">
+    <div class="level-connector"></div>
+    <div class="level-card-inner">
+      <div class="level-header">
+        <div class="level-badge">III</div>
+        <div class="level-title-group">
+          <div class="level-rank">ACOLYTE III</div>
+          <div class="level-name">Discipline and Dominion</div>
+        </div>
+      </div>
+      <div class="level-body">
+        <p class="level-description">Advanced combat training awaits. Discipline and Dominion pushes your skills further, teaching you to dominate the battlefield through superior technique, strategy, and unwavering focus.</p>
+        <div class="level-topics">
+          <div class="level-topic">Advanced combat material</div>
+          <div class="level-topic">Battlefield strategy and tactics</div>
+          <div class="level-topic">Utilizing Force abilities and other items</div>
+          <div class="level-topic">Mental discipline under pressure</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="level-card adept">
+    <div class="level-connector"></div>
+    <div class="level-card-inner">
+      <div class="level-header">
+        <div class="level-badge">&#10022;</div>
+        <div class="level-title-group">
+          <div class="level-rank">ADEPT</div>
+          <div class="level-name">Rite of Ascension</div>
+        </div>
+      </div>
+      <div class="level-body">
+        <p class="level-description">The final trial. The Rite of Ascension is the culmination of your training — a comprehensive test of everything you have learned. Only those who prove worthy may ascend to the rank of Adept and take their place among the true servants of the Sith Empire.</p>
+        <div class="level-topics">
+          <div class="level-topic">Final combat material and assessment</div>
+          <div class="level-topic">Comprehensive skills evaluation</div>
+          <div class="level-topic">Practical combat examination</div>
+          <div class="level-topic">Theoretical knowledge test</div>
+          <div class="level-topic">Ascension ceremony and promotion</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<footer id="site-footer">
+  <div class="footer-label">Galactic Status</div>
+  <div class="footer-ticker">
+    <div class="ticker-track">
+      <span>The Sith Empire continues its campaign across the galaxy. &nbsp;&bull;&nbsp; New outposts established in the Outer Rim. &nbsp;&bull;&nbsp; All citizens report to your sector commander. &nbsp;&bull;&nbsp; The Dark Side grows stronger. &nbsp;&bull;&nbsp;</span>
+      <span>The Sith Empire continues its campaign across the galaxy. &nbsp;&bull;&nbsp; New outposts established in the Outer Rim. &nbsp;&bull;&nbsp; All citizens report to your sector commander. &nbsp;&bull;&nbsp; The Dark Side grows stronger. &nbsp;&bull;&nbsp;</span>
+    </div>
+  </div>
+  <a href="map.html" class="footer-map-btn">View Map <span>&rarr;</span></a>
+</footer>
+
+<div class="particles" id="particles"></div>
+
+<script>
+const particlesContainer = document.getElementById('particles');
+for (let i = 0; i < 20; i++) {
+  const p = document.createElement('div');
+  p.className = 'particle';
+  p.style.left = Math.random() * 100 + '%';
+  p.style.animationDelay = Math.random() * 8 + 's';
+  p.style.animationDuration = (6 + Math.random() * 6) + 's';
+  p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+  particlesContainer.appendChild(p);
+}
+window.addEventListener('scroll', () => {
+  const header = document.getElementById('site-header');
+  header.style.boxShadow = window.scrollY > 50 ? '0 4px 30px rgba(255,0,0,0.15)' : 'none';
+});
+</script>
+
+<script src="mobile.js" defer></script>
+</body>
+</html>

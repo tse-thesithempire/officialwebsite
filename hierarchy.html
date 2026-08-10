@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hierarchy - The Sith Empire</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-deep: #050000;
+      --bg-secondary: #1A0000;
+      --accent-red: #8B0000;
+      --glow-red: #FF0000;
+      --text-light: #E8DCC8;
+      --text-dim: #888;
+      --gold: #DAA520;
+      --gold-bright: #FFD700;
+      --border-steel: #333333;
+      --font-display: 'Cinzel', serif;
+      --font-body: 'Rajdhani', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg-deep); color: var(--text-light); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* HEADER */
+    #site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 80px; background: rgba(5,0,0,0.92); border-bottom: 1px solid var(--accent-red); backdrop-filter: blur(12px); display: flex; align-items: center; padding: 0 48px 0 34px; }
+    .header-inner { width: 100%; margin: 0; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px; }
+    .logo-area { display: flex; align-items: center; gap: 12px; justify-self: start; }
+    .logo-icon { width: 50px; height: 50px; }
+    .logo-icon img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 6px rgba(255,0,0,0.5)); }
+    .logo-text h1 { font-family: var(--font-display); font-size: 20px; font-weight: 900; background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; filter: drop-shadow(0 0 8px rgba(218,165,32,0.4)); letter-spacing: 3px; line-height: 1.1; }
+    .logo-text span { font-size: 10px; font-weight: 600; color: #DAA520; letter-spacing: 4px; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 32px; align-items: center; justify-self: center; }
+    .nav-links a { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: #aaa; position: relative; padding: 4px 0; transition: color 0.3s ease; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 50%; right: 50%; height: 2px; background: var(--glow-red); box-shadow: 0 0 6px var(--glow-red); transition: left 0.3s ease, right 0.3s ease; }
+    .nav-links a:hover, .nav-links a.active { color: var(--glow-red); }
+    .nav-links a:hover::after, .nav-links a.active::after { left: 0; right: 0; }
+    .header-cta { display: flex; flex-direction: column; align-items: center; gap: 6px; justify-self: end; text-align: center; }
+    .header-cta a { font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-light); background: linear-gradient(to bottom, #7A0000, #500000); border: 2px solid var(--glow-red); padding: 10px 24px; box-shadow: 0 0 10px rgba(255,0,0,0.3); transition: all 0.3s ease; }
+    .header-cta a:hover { background: linear-gradient(to bottom, #A00000, #700000); transform: scale(1.05); box-shadow: 0 0 20px rgba(255,0,0,0.5); }
+    .header-cta small { display: block; font-size: 11px; font-weight: 600; color: #DAA520; letter-spacing: 2px; text-transform: uppercase; text-align: center; }
+
+    /* HERO — throne dais */
+    .h-hero {
+      position: relative;
+      min-height: 70vh;
+      padding: 140px 48px 60px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(218,165,32,0.18) 0%, transparent 60%),
+        linear-gradient(180deg, #050000 0%, #100000 50%, #050000 100%);
+    }
+    .h-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(90deg, rgba(218,165,32,0.05) 0 1px, transparent 1px 60px);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .h-hero-wrap {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 900px;
+    }
+    .h-crown {
+      width: 180px; height: 180px;
+      margin: 0 auto 24px;
+      position: relative;
+      display: grid; place-items: center;
+    }
+    .h-crown::before, .h-crown::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      border: 1px dashed rgba(218,165,32,0.5);
+      animation: crownSpin 40s linear infinite;
+    }
+    .h-crown::after { inset: 18px; border-style: dotted; animation-duration: 26s; animation-direction: reverse; border-color: rgba(255,0,0,0.5); }
+    @keyframes crownSpin { to { transform: rotate(360deg); } }
+    .h-crown img {
+      width: 108px; height: 108px; object-fit: contain;
+      filter: drop-shadow(0 0 25px rgba(218,165,32,0.6));
+      animation: crownFloat 4s ease-in-out infinite;
+    }
+    @keyframes crownFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+    .h-eyebrow {
+      font-family: var(--font-display);
+      letter-spacing: 10px;
+      color: var(--glow-red);
+      font-size: 12px;
+      margin-bottom: 12px;
+      text-shadow: 0 0 10px rgba(255,0,0,0.4);
+    }
+    .h-title {
+      font-family: var(--font-display);
+      font-size: clamp(44px, 5.5vw, 62px);
+      font-weight: 900;
+      background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      filter: drop-shadow(0 0 20px rgba(218,165,32,0.4));
+      letter-spacing: 8px;
+      line-height: 1;
+      margin-bottom: 24px;
+    }
+    .h-tagline {
+      font-family: var(--font-display);
+      letter-spacing: 6px;
+      color: var(--gold);
+      font-size: 14px;
+      display: inline-flex; align-items: center; gap: 14px;
+      margin-bottom: 28px;
+    }
+    .h-tagline::before, .h-tagline::after {
+      content: ''; display: block; width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+    .h-desc {
+      color: #ccc;
+      max-width: 720px;
+      margin: 0 auto;
+      font-size: 16px;
+      line-height: 1.85;
+    }
+
+    /* HIERARCHY LAYOUT — readable tier stack */
+    .pyramid-shell { max-width: 1200px; margin: 0 auto; padding: 40px 48px 80px; }
+    .tier { position: relative; margin-bottom: 48px; background: rgba(10,0,0,0.55); border: 1px solid var(--border-steel); border-left: 6px solid var(--border-steel); }
+
+    .tier-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 22px 28px;
+      background: linear-gradient(90deg, rgba(20,0,0,0.9), rgba(5,0,0,0.4));
+      border-bottom: 1px solid var(--border-steel);
+    }
+    .tier-numeral {
+      flex-shrink: 0;
+      width: 64px; height: 64px;
+      display: grid; place-items: center;
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+      color: #0a0000;
+      background: currentColor;
+      border-radius: 50%;
+      letter-spacing: 1px;
+    }
+    .tier-numeral span { color: #0a0000; }
+    .tier-heading { flex: 1; min-width: 0; }
+    .tier-name {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      line-height: 1.15;
+      margin-bottom: 4px;
+    }
+    .tier-sub {
+      font-size: 13px;
+      letter-spacing: 2px;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+    .tier-count {
+      flex-shrink: 0;
+      font-family: var(--font-display);
+      font-size: 12px;
+      letter-spacing: 3px;
+      color: var(--text-dim);
+      border: 1px solid var(--border-steel);
+      padding: 8px 14px;
+      text-transform: uppercase;
+    }
+
+    .tier-ranks {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      padding: 24px;
+    }
+    .rank {
+      position: relative;
+      padding: 18px 20px 18px 64px;
+      background: rgba(0,0,0,0.4);
+      border: 1px solid var(--border-steel);
+      border-radius: 4px;
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+      min-height: 96px;
+    }
+    .rank-roman {
+      position: absolute;
+      top: 50%; left: 12px;
+      transform: translateY(-50%);
+      width: 40px; height: 40px;
+      display: grid; place-items: center;
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: currentColor;
+      border: 2px solid currentColor;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.5);
+    }
+    .rank-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      line-height: 1.2;
+    }
+    .rank-note {
+      font-size: 14px;
+      color: #bbb;
+      line-height: 1.7;
+      font-style: normal;
+    }
+    .rank:hover { transform: translateY(-2px); border-color: currentColor; background: rgba(10,0,0,0.6); }
+
+    /* Tier color themes */
+    .tier-1 { color: var(--gold-bright); border-left-color: var(--gold-bright); }
+    .tier-1 .tier-header { border-bottom-color: rgba(255,215,0,0.4); }
+    .tier-1 .tier-name { color: var(--gold-bright); }
+
+    .tier-2 { color: #ff5a5a; border-left-color: var(--glow-red); }
+    .tier-2 .tier-header { border-bottom-color: rgba(255,0,0,0.4); }
+    .tier-2 .tier-name { color: var(--glow-red); }
+
+    .tier-3 { color: #d97070; border-left-color: #aa2222; }
+    .tier-3 .tier-header { border-bottom-color: rgba(170,34,34,0.4); }
+    .tier-3 .tier-name { color: #d97070; }
+
+    .tier-4 { color: #aaa; border-left-color: #666; }
+    .tier-4 .tier-header { border-bottom-color: rgba(150,150,150,0.35); }
+    .tier-4 .tier-name { color: #ccc; }
+
+    /* Table of contents / legend */
+    .tier-index {
+      max-width: 1200px;
+      margin: 0 auto 40px;
+      padding: 0 48px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .tier-index a {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 16px;
+      background: rgba(10,0,0,0.6);
+      border: 1px solid var(--border-steel);
+      border-left: 4px solid currentColor;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .tier-index a:hover { background: rgba(30,0,0,0.7); transform: translateX(3px); }
+    .tier-index .idx-num {
+      width: 32px; height: 32px;
+      display: grid; place-items: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 13px;
+      color: #0a0000;
+      background: currentColor;
+      border-radius: 50%;
+    }
+    .tier-index .idx-num span { color: #0a0000; }
+    .tier-index .idx-label {
+      font-family: var(--font-display);
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #eee;
+    }
+    .tier-index .idx-1 { color: var(--gold-bright); }
+    .tier-index .idx-2 { color: var(--glow-red); }
+    .tier-index .idx-3 { color: #d97070; }
+    .tier-index .idx-4 { color: #aaa; }
+
+    .back-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 40px; font-size: 13px; font-weight: 600; color: var(--glow-red); text-transform: uppercase; letter-spacing: 3px; padding: 12px 24px; border: 1px solid var(--accent-red); transition: all 0.3s; }
+    .back-link:hover { background: rgba(139,0,0,0.2); border-color: var(--glow-red); box-shadow: 0 0 10px rgba(255,0,0,0.2); }
+
+    /* FOOTER */
+    #site-footer { border-top: 1px solid var(--accent-red); border-bottom: 1px solid var(--accent-red); background: var(--bg-deep); padding: 16px 48px; display: flex; align-items: center; justify-content: space-between; }
+    .footer-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: var(--glow-red); flex-shrink: 0; }
+    .footer-ticker { flex: 1; overflow: hidden; margin: 0 24px; position: relative; }
+    .footer-ticker::before, .footer-ticker::after { content: ''; position: absolute; top: 0; bottom: 0; width: 40px; z-index: 1; }
+    .footer-ticker::before { left: 0; background: linear-gradient(to right, var(--bg-deep), transparent); }
+    .footer-ticker::after { right: 0; background: linear-gradient(to left, var(--bg-deep), transparent); }
+    .ticker-track { display: flex; white-space: nowrap; animation: tickerScroll 30s linear infinite; }
+    .ticker-track span { font-size: 13px; color: #999; letter-spacing: 1px; padding-right: 80px; }
+    @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+    .footer-map-btn { flex-shrink: 0; font-family: var(--font-body); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--glow-red); border: 1px solid var(--accent-red); padding: 8px 16px; background: transparent; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 6px; }
+    .footer-map-btn:hover { background: rgba(139,0,0,0.2); border-color: var(--glow-red); box-shadow: 0 0 10px rgba(255,0,0,0.2); }
+
+    @media (max-width: 900px) {
+      .tier-strap { grid-template-columns: 1fr; }
+      .tier-badge { clip-path: polygon(0 0, 100% 0, calc(100% - 14px) 100%, 14px 100%); padding: 20px; }
+      .tier-numeral { font-size: 48px; }
+    }
+    @media (max-width: 768px) {
+      #site-header { padding: 0 20px; }
+      .nav-links { display: none; }
+      .h-hero { padding: 120px 20px 40px; }
+      .h-title { font-size: 40px; letter-spacing: 5px; }
+      .h-crown { width: 130px; height: 130px; }
+      .h-crown img { width: 80px; height: 80px; }
+      .pyramid-shell { padding: 20px 20px 60px; }
+      #site-footer { flex-direction: column; gap: 12px; text-align: center; padding: 16px 20px; }
+      .footer-ticker { margin: 0; }
+    }
+  
+
+
+/* === UNIVERSAL IMPERIAL NAVIGATION === */
+#site-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  height: 80px !important;
+  min-height: 80px !important;
+  background: rgba(5,0,0,0.92) !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--accent-red, #8B0000) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(12px) !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 48px 0 34px !important;
+}
+#site-header::before { content: none !important; display: none !important; }
+.header-inner {
+  width: 100% !important;
+  margin: 0 !important;
+  display: grid !important;
+  grid-template-columns: 1fr auto 1fr !important;
+  align-items: center !important;
+  gap: 20px !important;
+}
+.logo-area {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+  justify-self: start !important;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+.logo-icon {
+  width: 50px !important;
+  height: 50px !important;
+  position: relative !important;
+  flex: 0 0 auto !important;
+}
+.logo-icon::before { content: none !important; display: none !important; animation: none !important; }
+.logo-icon img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  filter: drop-shadow(0 0 6px rgba(255,0,0,0.5)) !important;
+}
+.logo-text h1 {
+  font-family: 'Cinzel', serif !important;
+  font-size: 20px !important;
+  font-weight: 900 !important;
+  background: linear-gradient(180deg, #FFD700 0%, #DAA520 30%, #B8860B 50%, #8B6914 70%, #DAA520 90%, #FFD700 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  text-shadow: none !important;
+  filter: drop-shadow(0 0 8px rgba(218,165,32,0.4)) drop-shadow(0 2px 4px rgba(0,0,0,0.8)) !important;
+  letter-spacing: 3px !important;
+  line-height: 1.1 !important;
+  margin: 0 !important;
+}
+.logo-text span {
+  display: block !important;
+  margin-top: 0 !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  color: #DAA520 !important;
+  letter-spacing: 4px !important;
+  text-transform: uppercase !important;
+  white-space: nowrap !important;
+}
+.nav-links {
+  display: flex !important;
+  gap: 32px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  justify-self: center !important;
+  flex-wrap: nowrap !important;
+}
+.nav-links a {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  color: #aaa !important;
+  position: relative !important;
+  padding: 4px 0 !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease, text-shadow 0.3s ease !important;
+  transform: none !important;
+}
+.nav-links a::before { content: none !important; display: none !important; }
+.nav-links a::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: -2px !important;
+  left: 50% !important;
+  right: 50% !important;
+  width: auto !important;
+  height: 2px !important;
+  background: var(--glow-red, #FF0000) !important;
+  box-shadow: 0 0 6px var(--glow-red, #FF0000) !important;
+  transition: left 0.3s ease, right 0.3s ease !important;
+  transform: none !important;
+}
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--glow-red, #FF0000) !important;
+  text-shadow: none !important;
+  transform: none !important;
+}
+.nav-links a:hover::after,
+.nav-links a.active::after { left: 0 !important; right: 0 !important; }
+.header-cta {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  justify-self: end !important;
+  text-align: center !important;
+}
+.header-cta a {
+  font-family: 'Rajdhani', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 14px !important;
+  line-height: 1 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: var(--text-light, #E8DCC8) !important;
+  background: linear-gradient(to bottom, #7A0000, #500000) !important;
+  border: 2px solid var(--glow-red, #FF0000) !important;
+  border-radius: 0 !important;
+  padding: 10px 24px !important;
+  box-shadow: 0 0 10px rgba(255,0,0,0.3) !important;
+  transition: all 0.3s ease !important;
+  text-decoration: none !important;
+  isolation: auto !important;
+  overflow: visible !important;
+}
+.header-cta a::after { content: none !important; display: none !important; }
+.header-cta a:hover {
+  background: linear-gradient(to bottom, #A00000, #700000) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 0 20px rgba(255,0,0,0.5) !important;
+}
+.header-cta small {
+  display: block !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  font-size: 8px !important;
+  line-height: 1 !important;
+  font-weight: 600 !important;
+  color: #DAA520 !important;
+  letter-spacing: 1.25px !important;
+  text-transform: uppercase !important;
+  text-align: center !important;
+}
+@media (max-width: 1180px) {
+  #site-header { height: auto !important; min-height: 80px !important; padding: 12px 22px !important; }
+  .header-inner { grid-template-columns: 1fr !important; justify-items: center !important; gap: 12px !important; }
+  .logo-area, .header-cta { justify-self: center !important; }
+  .nav-links { flex-wrap: wrap !important; gap: 10px 20px !important; }
+}
+@media (max-width: 720px) {
+  #site-header { position: absolute !important; padding: 14px !important; }
+  .nav-links { gap: 9px 14px !important; }
+  .nav-links a { font-size: 11px !important; }
+  .header-cta a { padding: 9px 14px !important; font-size: 12px !important; }
+}
+
+
+/* === HIERARCHY HEADER NUMERAL REMOVAL === */
+.tier-index a { justify-content: center !important; text-align: center !important; }
+.tier-index .idx-label { text-align: center !important; }
+
+/* === HERO RECENTERING AFTER EMBLEM REMOVAL === */
+.h-hero-wrap {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+  text-align: center !important;
+}
+
+</style>
+<link rel="stylesheet" href="mobile.css">
+</head>
+<body>
+<header id="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-area">
+      <div class="logo-icon"><img src="ts-empire-symbol.png" alt="Sith Empire Symbol"></div>
+      <div class="logo-text">
+        <h1>THE SITH EMPIRE</h1>
+        <span>Order &middot; Power &middot; Destiny</span>
+      </div>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="hierarchy.html" class="active">Hierarchy</a>
+      <a href="common-etiquette.html">Common Etiquette</a>
+      <a href="rites-of-the-sith.html">Rites of the Sith</a>
+      <a href="law-and-order.html">Law and Order</a>
+      <a href="academy.html">Academy</a>
+      <a href="spheres.html">Spheres</a>
+      <a href="institutions.html">Institutions</a>
+      <a href="news.html">News</a>
+    </nav>
+    <div class="header-cta">
+      <a href="https://discord.com/invite/bRE6W3CkBe">Join the Empire</a>
+      <small>6000+ Members</small>
+    </div>
+  </div>
+</header>
+
+<section class="h-hero">
+  <div class="h-hero-wrap">
+    <div class="h-eyebrow">ORDER OF THE DARK LORDS</div>
+    <h1 class="h-title">HIERARCHY</h1>
+    <div class="h-tagline">Power &nbsp;&middot;&nbsp; Rank &nbsp;&middot;&nbsp; Legacy</div>
+    <p class="h-desc">The Sith Empire operates through a strict hierarchical structure, ensuring absolute order and unwavering loyalty from the highest echelons of power to the lowest ranks of initiation. Ascend the pyramid — every rung is earned in blood, discipline, and mastery of the Dark Side.</p>
+  </div>
+</section>
+
+<nav class="tier-index" aria-label="Jump to tier">
+  <a href="#tier-1" class="idx-1"><span class="idx-label">High Command</span></a>
+  <a href="#tier-2" class="idx-2"><span class="idx-label">Upper Echelon</span></a>
+  <a href="#tier-3" class="idx-3"><span class="idx-label">Middle Echelon</span></a>
+  <a href="#tier-4" class="idx-4"><span class="idx-label">Lower Echelon</span></a>
+</nav>
+
+<main class="pyramid-shell">
+
+  <!-- TIER 1 — HIGH COMMAND -->
+  <section class="tier tier-1" id="tier-1">
+    <div class="tier-header">
+      <div class="tier-heading">
+        <div class="tier-name">High Command</div>
+        <div class="tier-sub">Supreme Leadership</div>
+      </div>
+      <div class="tier-count">6 Ranks</div>
+    </div>
+    <div class="tier-ranks">
+      <div class="rank">
+        <div class="rank-roman">XV</div>
+        <div class="rank-title">Dark Lord of the Sith</div>
+        <div class="rank-note">Supreme ruler; the highest possible rank.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">XIV</div>
+        <div class="rank-title">Hand</div>
+        <div class="rank-note">Right-hand and personal apprentice of the Sith Emperor.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">XIII</div>
+        <div class="rank-title">Voice</div>
+        <div class="rank-note">Ancillary will of the Sith Emperor.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">XII</div>
+        <div class="rank-title">Wrath</div>
+        <div class="rank-note">Personal executioner of the Sith Emperor.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">XII</div>
+        <div class="rank-title">Triumvirate</div>
+        <div class="rank-note">Founding members of The Sith Empire.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">XII</div>
+        <div class="rank-title">Dark Council</div>
+        <div class="rank-note">Governing body of high-ranking Sith lords.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIER 2 — UPPER ECHELON -->
+  <section class="tier tier-2" id="tier-2">
+    <div class="tier-header">
+      <div class="tier-heading">
+        <div class="tier-name">Upper Echelon</div>
+        <div class="tier-sub">Senior Nobility &amp; Elite Commanders</div>
+      </div>
+      <div class="tier-count">4 Ranks</div>
+    </div>
+    <div class="tier-ranks">
+      <div class="rank">
+        <div class="rank-roman">XI</div>
+        <div class="rank-title">Darth</div>
+        <div class="rank-note">Title reserved for powerful Sith Lords.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">X</div>
+        <div class="rank-title">Sith Lord</div>
+        <div class="rank-note">Senior operational leader.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">IX</div>
+        <div class="rank-title">Sith Master</div>
+        <div class="rank-note">Master of the Sith ways.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">VIII</div>
+        <div class="rank-title">Sith Overseer</div>
+        <div class="rank-note">Oversees regions, fleets, or academies.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIER 3 — MIDDLE ECHELON -->
+  <section class="tier tier-3" id="tier-3">
+    <div class="tier-header">
+      <div class="tier-heading">
+        <div class="tier-name">Middle Echelon</div>
+        <div class="tier-sub">Mid-Level Officers &amp; Specialists</div>
+      </div>
+      <div class="tier-count">7 Ranks</div>
+    </div>
+    <div class="tier-ranks">
+      <div class="rank">
+        <div class="rank-roman">VII</div>
+        <div class="rank-title">Sith Knight</div>
+        <div class="rank-note">Paladin of the Empire.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">VI</div>
+        <div class="rank-title">Sith Apprentice</div>
+        <div class="rank-note">Student of the Dark Side.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">VI</div>
+        <div class="rank-title">Sith Marauder</div>
+        <div class="rank-note">Elite frontline warrior.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">VI</div>
+        <div class="rank-title">Sith Inquisitor</div>
+        <div class="rank-note">Proficient in Judicial Law and Order.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">VI</div>
+        <div class="rank-title">Dark Honor Guard</div>
+        <div class="rank-note">Protector of the throne.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">VI</div>
+        <div class="rank-title">Sith Curator</div>
+        <div class="rank-note">Keeper of ancient knowledge.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">V</div>
+        <div class="rank-title">Sith Warrior</div>
+        <div class="rank-note">Combat specialist.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIER 4 — LOWER ECHELON -->
+  <section class="tier tier-4" id="tier-4">
+    <div class="tier-header">
+      <div class="tier-heading">
+        <div class="tier-name">Lower Echelon</div>
+        <div class="tier-sub">Trainees &amp; Initiates</div>
+      </div>
+      <div class="tier-count">4 Ranks</div>
+    </div>
+    <div class="tier-ranks">
+      <div class="rank">
+        <div class="rank-roman">IV</div>
+        <div class="rank-title">Sith Adept</div>
+        <div class="rank-note">Skilled practitioner of the Dark Side.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">III</div>
+        <div class="rank-title">Sith Acolyte III</div>
+        <div class="rank-note">Advanced initiate.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">II</div>
+        <div class="rank-title">Sith Acolyte II</div>
+        <div class="rank-note">Intermediate initiate.</div>
+      </div>
+      <div class="rank">
+        <div class="rank-roman">I</div>
+        <div class="rank-title">Sith Acolyte I</div>
+        <div class="rank-note">Entry-level initiate.</div>
+      </div>
+    </div>
+  </section>
+
+  <a href="index.html" class="back-link">&larr; Return to the Empire</a>
+</main>
+
+<footer id="site-footer">
+  <div class="footer-label">Galactic Status</div>
+  <div class="footer-ticker">
+    <div class="ticker-track">
+      <span>The Sith Empire maintains absolute order through its chain of command. &nbsp;&bull;&nbsp; Loyalty is paramount. &nbsp;&bull;&nbsp; The Dark Side guides all. &nbsp;&bull;&nbsp;</span>
+      <span>The Sith Empire maintains absolute order through its chain of command. &nbsp;&bull;&nbsp; Loyalty is paramount. &nbsp;&bull;&nbsp; The Dark Side guides all. &nbsp;&bull;&nbsp;</span>
+    </div>
+  </div>
+  <a href="map.html" class="footer-map-btn">View Map <span>&rarr;</span></a>
+</footer>
+
+<script src="mobile.js" defer></script>
+</body>
+</html>
